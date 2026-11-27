@@ -989,7 +989,7 @@
      ],
      next:"현장점검 회신 → 납품 서류 제출"},
     {id:"yunus", emoji:"🌍", name:"유누스코리아", role:"이사장 · 소셜비즈니스/SDGs",
-     sub:"평창군 청소년 캠프 2건 · 서울대 협업",
+     sub:"평창군 청소년 캠프 2건 · 대학 연구팀 협업",
      items:[
        "2027-01-15 지역자원 교육캠프 (평창군)",
        "2027-01-21~22 그린바이오 아카데미 1박 2일",
@@ -1396,7 +1396,7 @@
         var k = "s" + n + "t" + (i+1);
         var on = st.done.indexOf(k) >= 0;
         return '<li><button class="task' + (on ? " checked" : "") + '" data-k="' + k + '" aria-pressed="' + (on ? "true" : "false") + '">'
-          + '<span class="box">✓</span><span class="tx">' + esc(t) + '</span></button></li>';
+          + '<span class="box">' + (on ? "✓" : "") + '</span><span class="tx">' + esc(t) + '</span></button></li>';
       }).join("");
       return '<div class="stage ' + ss + open + '" data-stage="' + n + '">'
         + '<button class="st-head" aria-expanded="' + (open ? "true" : "false") + '">'
@@ -1417,7 +1417,7 @@
           var k = "p" + (i+1);
           var on = st.done.indexOf(k) >= 0;
           return '<li><button class="task' + (on ? " checked" : "") + '" data-k="' + k + '" aria-pressed="' + (on ? "true" : "false") + '">'
-            + '<span class="box">✓</span><span class="tx">' + esc(packItemLabel(item, goal)) + '</span></button></li>';
+            + '<span class="box">' + (on ? "✓" : "") + '</span><span class="tx">' + esc(packItemLabel(item, goal)) + '</span></button></li>';
         }).join("")
         + '</ul></div>'
         + '<div class="finish' + (s.done === s.total ? "" : " off") + '" id="finishBox">'
@@ -1536,6 +1536,8 @@
         var on = i < 0;
         t.classList.toggle("checked", on);
         t.setAttribute("aria-pressed", on ? "true" : "false");
+        var bx = t.querySelector(".box");
+        if(bx) bx.textContent = on ? "✓" : "";
         refreshWorkflow(deskId, trackId);
       });
     });
@@ -1798,7 +1800,7 @@
     function task(k, label, hint, extraCls){
       var on = st.done.indexOf(k) >= 0;
       return '<li><button class="task' + (on ? " checked" : "") + '" data-gk="' + k + '" aria-pressed="' + (on ? "true" : "false") + '">'
-        + '<span class="box">✓</span><span class="tx">' + esc(label) + (hint ? '<small class="hint">' + esc(hint) + '</small>' : '') + '</span></button></li>';
+        + '<span class="box">' + (on ? "✓" : "") + '</span><span class="tx">' + esc(label) + (hint ? '<small class="hint">' + esc(hint) + '</small>' : '') + '</span></button></li>';
     }
 
     document.getElementById("shBody").innerHTML =
@@ -1869,6 +1871,8 @@
         var on = i < 0;
         b.classList.toggle("checked", on);
         b.setAttribute("aria-pressed", on ? "true" : "false");
+        var bx = b.querySelector(".box");
+        if(bx) bx.textContent = on ? "✓" : "";
         var s = noticeStats(state[grantNoticeId]);
         var lab = document.getElementById("gdLabel");
         if(lab) lab.textContent = "준비 " + s.done + "/" + s.total;
