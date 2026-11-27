@@ -144,12 +144,12 @@
   @keyframes spin{to{transform:rotate(360deg)}}
   .desk .badge{
     position:absolute;top:34px;left:50%;transform:translateX(-50%);
-    max-width:60px;font-size:7.5px;font-weight:800;line-height:1.2;letter-spacing:-.05em;
-    padding:1.5px 4px;border-radius:6px;color:#4A3527;
+    font-size:8px;font-weight:800;line-height:1.2;letter-spacing:-.05em;
+    padding:1px 4px;border-radius:6px;color:#4A3527;
     background:rgba(255,251,242,.97);
     border:1px solid rgba(107,74,51,.24);
     box-shadow:0 2px 5px rgba(20,12,6,.34);
-    white-space:normal;text-align:center;word-break:keep-all;
+    white-space:nowrap;text-align:center;
     display:block;
   }
   .desk[data-st="on"] .badge{background:rgba(240,247,238,.97);border-color:rgba(63,107,80,.42);color:#2F4A38}
@@ -432,7 +432,7 @@
     .ava{width:54px;height:54px;flex-basis:54px}
     .tab{font-size:10.5px;padding:8px 2px}
     .desk .face{width:28px;height:28px}
-    .desk .badge{top:30px;font-size:7px;max-width:52px;padding:1px 3px}
+    .desk .badge{top:30px;font-size:7.5px;padding:1px 3px}
     main{padding:10px 12px 0}
     nav{padding:10px 12px 8px}
     .hdr{padding:16px 12px 12px}
@@ -806,6 +806,12 @@
 
   var COLX = [24.5, 37.4, 50.3, 63.2, 76.1];
   var ROWY = [51.5, 66.5, 82.5];
+  /* 책상 배지: 좌석 간격(약 51px)에 맞춰 짮은 이름으로 표시. 전체 이름은 모달·비서현황에 그대로 나옵니다. */
+  var SHORT = {
+    gov:"정부지원", academy:"산학협력", brief:["10:30","브리핑 완료"], b2b:"B2B", global:"글로벌",
+    tax:"회계·세무", irb:"논문·IRB", pr:"홍보", lecture:"강의", press:"취재·기고",
+    docs:"서류·행정", brunch:"브런치", media:"영상", dev:"개발", yunus:"유누스"
+  };
 
   var BRANDS = [
     {id:"geist", emoji:"🏛️", name:"가이스트", role:"대표 · 전략/B2B/산학협력",
@@ -944,11 +950,13 @@
     var box = document.getElementById("desks");
     var html = "";
     DESKS.forEach(function(d){
+      var b = SHORT[d.id] || d.name;
+      var badge = Array.isArray(b) ? b.map(esc).join("<br>") : esc(b);
       html += '<button class="desk'+(d.busy?" busy":"")+'" data-st="'+d.st+'" data-id="'+d.id+'"'
         + ' style="left:'+COLX[d.col-1]+'%;top:'+ROWY[d.row-1]+'%"'
-        + ' aria-label="'+esc(d.name+" · "+STATUS_TEXT[d.st])+'">'
+        + ' aria-label="'+esc(d.name+" · "+STATUS_TEXT[d.st])+'" title="'+esc(d.name)+'">'
         + '<span class="face"><img src="./avatar.png" alt=""></span>'
-        + '<span class="badge">'+esc(d.name)+'</span>'
+        + '<span class="badge">'+badge+'</span>'
         + '</button>';
     });
     box.innerHTML = html;
