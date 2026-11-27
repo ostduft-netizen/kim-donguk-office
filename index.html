@@ -138,10 +138,14 @@
     display:block;background:none;border:0;padding:0;cursor:pointer;
     font-family:var(--sans);line-height:0;
   }
+  .desk .ring{
+    display:block;width:36px;height:36px;border-radius:50%;padding:2px;
+    background:conic-gradient(#D8A657 calc(var(--p, 0) * 1%), rgba(255,251,242,.28) 0);
+    box-shadow:0 2px 8px rgba(20,12,6,.45);
+  }
   .desk .face{
     position:relative;width:30px;height:30px;border-radius:50%;overflow:hidden;
-    border:2px solid rgba(255,250,240,.96);
-    box-shadow:0 2px 7px rgba(20,12,6,.55),0 0 0 1px rgba(216,166,87,.45);
+    border:0;
     background:#F6E7CE;display:block;margin:0 auto;
   }
   .desk .face img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.02)}
@@ -403,6 +407,57 @@
     letter-spacing:-.02em;line-height:1.5;box-shadow:0 5px 14px rgba(46,74,56,.25);
   }
   .finish.off{background:linear-gradient(90deg,rgba(107,74,51,.08),rgba(107,74,51,.05));color:#8A6A46;box-shadow:none;border:1px dashed rgba(107,74,51,.28)}
+  /* ── 지원사업 비서 ─────────────────── */
+  .gtabs{display:flex;gap:5px;margin:10px 0 10px;overflow-x:auto;padding-bottom:2px}
+  .gtab{flex:0 0 auto;appearance:none;border:1px solid var(--line-2);background:linear-gradient(180deg,#FFFDF7,#F8F0DF);border-radius:999px;padding:6px 11px;font-family:var(--sans);font-size:10.5px;font-weight:800;color:#6B4A33;letter-spacing:-.02em;cursor:pointer;white-space:nowrap}
+  .gtab.active{background:linear-gradient(180deg,#75513A,#4A3527);color:#FFF7E9;border-color:#3A2A1E}
+  .gfilters{display:flex;gap:5px;overflow-x:auto;padding-bottom:4px;margin-bottom:8px}
+  .fchip{flex:0 0 auto;appearance:none;border:1px solid var(--line);background:#FFFDF7;border-radius:999px;padding:5px 9px;font-family:var(--sans);font-size:9.5px;font-weight:800;color:#8A6A46;cursor:pointer;white-space:nowrap}
+  .fchip.active{background:rgba(196,136,60,.16);border-color:rgba(196,136,60,.45);color:#8A5A1E}
+  .notice{display:flex;flex-direction:column;gap:5px;text-align:left;width:100%;padding:11px 12px;border-radius:14px;border:1px solid var(--line);background:linear-gradient(180deg,#FFFCF6,#FBF4E6);cursor:pointer;font-family:var(--sans);color:var(--ink);box-shadow:0 2px 7px rgba(74,53,39,.05)}
+  .nt-top{display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
+  .nt-title{flex:1;font-size:12px;font-weight:800;letter-spacing:-.03em;line-height:1.4;color:#3B2A1E;word-break:keep-all}
+  .nt-meta{font-size:9.5px;font-weight:700;color:#8A7565;letter-spacing:-.02em}
+  .nt-tags{display:flex;gap:4px;flex-wrap:wrap}
+  .nt-fit{display:flex;align-items:center;gap:7px;margin-top:2px}
+  .fitbar{flex:1;height:5px;border-radius:99px;background:rgba(107,74,51,.12);overflow:hidden}
+  .fitbar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#C4883C,#D8A657)}
+  .fitbar i.hot{background:linear-gradient(90deg,#3F6B50,#69A177)}
+  .nt-fit b{font-size:9px;font-weight:800;color:#8A6A46}
+  .nt-prog{font-size:9px;font-weight:800;color:#A28C77;letter-spacing:-.02em}
+  .backbtn{appearance:none;border:1px solid var(--line-2);background:#FFFDF8;border-radius:999px;padding:5px 11px;font-family:var(--sans);font-size:10px;font-weight:800;color:#6B4A33;cursor:pointer;margin:10px 0 10px}
+  .dt-top{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+  .dt-title{margin:0;font-family:var(--serif);font-size:16px;font-weight:700;color:#3B2A1E;line-height:1.35;letter-spacing:-.02em;word-break:keep-all}
+  .dt-meta{margin-top:5px;font-size:10px;font-weight:700;color:#8A7565;letter-spacing:-.02em;word-break:keep-all}
+  .dt-note{margin-top:6px;font-size:10.5px;line-height:1.55;color:#6E5A47;letter-spacing:-.02em;word-break:keep-all}
+  .hint{display:block;margin-top:1px;font-size:9px;font-weight:600;color:#A28C77;letter-spacing:-.02em}
+  .orgcard{display:flex;flex-direction:column;gap:6px;padding:12px 13px;border-radius:15px;border:1px solid var(--line);background:linear-gradient(180deg,#FFFCF6,#FBF4E6);box-shadow:0 2px 7px rgba(74,53,39,.05);margin-bottom:8px}
+  .oc-top{display:flex;align-items:center;gap:8px}
+  .oc-emoji{font-size:18px}
+  .oc-name{flex:1;font-family:var(--serif);font-size:13.5px;font-weight:700;color:#3B2A1E;letter-spacing:-.02em}
+  .oc-count{font-size:9px;font-weight:800;color:#8A5A1E;background:rgba(196,136,60,.14);border-radius:6px;padding:2px 6px;text-align:center;line-height:1.4}
+  .oc-tags{display:flex;gap:4px;flex-wrap:wrap}
+  .oc-desc{font-size:10px;color:#8A7565;font-weight:600;letter-spacing:-.02em}
+  .oc-foot{font-size:9.5px;font-weight:800;color:#8A6A46;letter-spacing:-.02em}
+  .orgcard .btn{align-self:flex-start}
+  .grant-card{border-radius:16px;padding:13px 14px;background:linear-gradient(160deg,#FFFCF6,#F9F1E1);border:1px solid rgba(196,136,60,.32);box-shadow:0 4px 14px rgba(74,53,39,.07)}
+  .gc-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .gc-title{font-family:var(--serif);font-size:14px;font-weight:700;color:#3B2A1E;letter-spacing:-.02em}
+  .gc-badge{font-size:9px;font-weight:800;color:#2F5A3C;background:rgba(63,107,80,.13);border:1px solid rgba(63,107,80,.28);border-radius:6px;padding:2px 6px;white-space:nowrap}
+  .gc-sub{margin-top:4px;font-size:9.5px;font-weight:600;color:#8A7565;letter-spacing:-.02em;line-height:1.5;word-break:keep-all}
+  .gc-stats{display:flex;gap:12px;margin-top:7px;font-size:9px;font-weight:700;color:#A28C77;letter-spacing:-.02em}
+  .gc-stats b{color:#5B4635}
+  .gminis{display:flex;flex-direction:column;gap:5px;margin:9px 0}
+  .gmini{display:flex;flex-direction:column;gap:3px;text-align:left;width:100%;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:#FFFDF7;cursor:pointer;font-family:var(--sans)}
+  .gm-t{display:flex;gap:6px;align-items:center;justify-content:space-between}
+  .gm-name{font-size:10.5px;font-weight:800;color:#3B2A1E;letter-spacing:-.03em;line-height:1.35;word-break:keep-all}
+  .gm-p{font-size:9px;font-weight:800;color:#A28C77}
+  /* ── 설치 배너 ────────────────────── */
+  .install{display:flex;align-items:center;gap:8px;margin:0 16px 2px;padding:8px 11px;border-radius:12px;background:linear-gradient(180deg,#F5EBD8,#EADCC2);border:1px solid rgba(154,106,32,.28);font-size:10px;font-weight:700;color:#5B4635;letter-spacing:-.02em}
+  .install[hidden]{display:none}
+  .install span{flex:1;line-height:1.4;word-break:keep-all}
+  .install .ib{appearance:none;border:0;border-radius:999px;padding:5px 10px;background:linear-gradient(180deg,#75513A,#4A3527);color:#FFF7E9;font-family:var(--sans);font-size:10px;font-weight:800;cursor:pointer;white-space:nowrap}
+  .install .ix{appearance:none;border:0;background:transparent;color:#A28C77;font-size:13px;cursor:pointer;padding:2px 4px}
   /* ── forms ───────────────────────────── */
   .field{display:flex;flex-direction:column;gap:5px}
   .field label{font-size:10px;font-weight:800;color:var(--muted);letter-spacing:-.02em;padding-left:2px}
@@ -523,7 +578,8 @@
     .who h1{font-size:20px}
     .ava{width:54px;height:54px;flex-basis:54px}
     .tab{font-size:10.5px;padding:8px 2px}
-    .desk .face{width:28px;height:28px}
+    .desk .face{width:26px;height:26px}
+    .desk .ring{width:30px;height:30px;padding:2px}
     .desk .badge{top:30px;font-size:7.5px;padding:1px 3px}
     main{padding:10px 12px 0}
     nav{padding:10px 12px 8px}
@@ -543,6 +599,12 @@
     </div>
     <div class="live"><span class="pulse"></span>실시간 연결</div>
   </header>
+
+  <div class="install" id="installBar" hidden>
+    <span>📲 홈 화면에 추가하면 앱처럼 바로 열 수 있어요</span>
+    <button class="ib" id="installBtn" type="button">설치</button>
+    <button class="ix" id="installClose" type="button" aria-label="닫기">✕</button>
+  </div>
 
   <nav id="nav" role="tablist" aria-label="비서실 메뉴">
     <button class="tab active" role="tab" aria-selected="true" data-panel="office"><span class="ico">🗺️</span>오피스 맵</button>
@@ -628,6 +690,8 @@
       <div class="sec"><h2>논문 파이프라인</h2><span class="cnt">2트랙 · SSCI/KCI</span></div>
       <div class="goal-card" id="goalCard"></div>
       <div class="stack" id="paperHub" style="margin-top:9px"></div>
+      <div class="sec"><h2>지원사업 비서</h2><span class="cnt">3트랙 매칭</span></div>
+      <div id="grantHub"></div>
       <div class="sec"><h2>작업실 — 진행 중</h2><span class="cnt">4개 작업</span></div>
       <div class="stack" id="workList"></div>
     </section>
@@ -1422,6 +1486,8 @@
     });
 
     buildWorkroomHub();
+    buildGrantHub();
+    updateDeskProgress();
     buildStatus();
   }
 
@@ -1502,6 +1568,20 @@
     return Math.round(sum / desk.tracks.length);
   }
 
+  function deskPct(deskId, wst){
+    if(deskId === "gov") return grantDeskPct();
+    return deskAvgPct(deskId, wst);
+  }
+
+  function updateDeskProgress(){
+    var wst = wfAll();
+    DESKS.forEach(function(d){
+      var pct = deskPct(d.id, wst);
+      var el = document.querySelector('[data-ring="' + d.id + '"]');
+      if(el){ el.style.setProperty("--p", pct); }
+    });
+  }
+
   function buildWorkroomHub(){
     var hub = document.getElementById("paperHub");
     if(!hub) return;
@@ -1536,6 +1616,319 @@
         + '<div class="g-sub">트랙 A ' + esc(state.irb.A.goal) + ' · ' + a.stage + '단계(' + a.pct + '%) &nbsp;|&nbsp; 트랙 B ' + esc(state.irb.B.goal) + ' · ' + bk.stage + '단계(' + bk.pct + '%)'
         + '<br>가장 앞선 트랙 기준 ' + Math.round(best * 100) + '% · 5단계 + 투고 패키지 6종</div>';
     }
+  }
+
+  /* ───────── 지원사업 비서 ───────── */
+  var GKEY = "kdu-office-grants-v1";
+
+  var GRANT_ORGS = [
+    {id:"geist", name:"가이스트", emoji:"🏛️", types:["창업","B2B","R&D","바우처"],
+     desc:"법인사업자 · 부산 소재 · 산학협력 수행 이력"},
+    {id:"yunus", name:"유누스코리아", emoji:"🌍", types:["비영리","SDGs","공익사업","교육"],
+     desc:"비영리·공익사업 · 청소년 캠프·교육 프로그램"},
+    {id:"linsk", name:"린스크", emoji:"🏢", types:["출판","콘텐츠","유통지원"],
+     desc:"출판·콘텐츠 제작 · 유통·협업 채널"}
+  ];
+
+  var GRANT_NOTICES = [
+    {id:"n1", title:"부산 사회적경제 임팩트 투자 연계 지원사업", host:"부산광역시 사회적경제지원센터",
+     due:"2026-11-30", at:"18:00", fit:78, orgs:["geist","linsk"], verified:true,
+     note:"부산 소재 사회적경제기업 대상 · 상위 10개사 데모데이·1:1 투자상담"},
+    {id:"n2", title:"부산 사회연대경제 WEEK 팝업빌리지 참여기업 모집", host:"부산광역시 사회적경제지원센터",
+     due:"2026-12-02", at:"15:00", fit:64, orgs:["geist","yunus"], verified:true,
+     note:"오프라인 판매기획전 · 선착순 모집 · 참가비 별도"},
+    {id:"n3", title:"창업·R&D 바우처형 공고", host:"예시 공고 (실제 공고 확인 필요)",
+     due:"2026-12-19", at:"18:00", fit:71, orgs:["geist"], verified:false,
+     note:"기술개발·시제품 제작 바우처 유형"},
+    {id:"n4", title:"비영리 공익사업·SDGs 지원 공고", host:"예시 공고 (실제 공고 확인 필요)",
+     due:"2026-12-12", at:"17:00", fit:66, orgs:["yunus"], verified:false,
+     note:"공익사업 운영비·프로그램 지원 유형"},
+    {id:"n5", title:"출판·콘텐츠 유통 지원 공고", host:"예시 공고 (실제 공고 확인 필요)",
+     due:"2026-12-24", at:"18:00", fit:59, orgs:["linsk"], verified:false,
+     note:"출판·콘텐츠 제작·유통 지원 유형"}
+  ];
+
+  var GRANT_ELIG = ["업력 요건 충족", "소재지 요건 충족 (부산)", "법인유형 요건 충족"];
+  var GRANT_DOCS = ["사업자등록증", "법인등기부등본", "최근 3년 재무제표", "납세증명서", "4대보험 가입자명부", "통장사본"];
+  var GRANT_PLAN = [
+    {n:"① 문제인식", g:"해결하려는 사회문제와 근거 데이터"},
+    {n:"② 해결방안", g:"제품·서비스, 실현 가능성, 차별성"},
+    {n:"③ 성장전략", g:"시장·고객, 매출·확장 계획"},
+    {n:"④ 팀 역량", g:"대표·핵심 인력, 협력 네트워크"},
+    {n:"⑤ 예산", g:"항목별 집행 계획과 자부담"}
+  ];
+  var GRANT_AGREE = ["협약 체결", "집행 계획 확정", "중간 점검", "정산 보고"];
+  var GRANT_TOTAL = GRANT_ELIG.length + GRANT_DOCS.length + GRANT_PLAN.length + GRANT_AGREE.length;
+
+  var grantView = "board";
+  var grantFilter = "all";
+  var grantNoticeId = null;
+
+  function grantAll(){
+    var saved = LS.get(GKEY, {});
+    var out = {};
+    GRANT_NOTICES.forEach(function(n){
+      var s = (saved && saved[n.id]) || {};
+      var done = Array.isArray(s.done) ? s.done.slice() : (n.id === "n1" ? ["e1","e2","e3","d1","d2"] : []);
+      out[n.id] = {
+        done: done,
+        memo: typeof s.memo === "string" ? s.memo : ""
+      };
+    });
+    return out;
+  }
+  function grantSave(st){ LS.set(GKEY, st); }
+  function noticeStats(st){
+    var done = st.done.length;
+    if(done > GRANT_TOTAL) done = GRANT_TOTAL;
+    return {done:done, total:GRANT_TOTAL, pct:Math.round(done / GRANT_TOTAL * 100)};
+  }
+  function grantDeskPct(){
+    var st = grantAll();
+    var best = 0;
+    GRANT_NOTICES.forEach(function(n){
+      var p = noticeStats(st[n.id]).pct;
+      if(p > best) best = p;
+    });
+    return best;
+  }
+  function fitTone(v){ return v >= 75 ? "hot" : (v >= 65 ? "soon" : ""); }
+  function noticeById(id){
+    var n = null;
+    GRANT_NOTICES.forEach(function(x){ if(x.id === id) n = x; });
+    return n;
+  }
+  function orgName(id){
+    var o = null;
+    GRANT_ORGS.forEach(function(x){ if(x.id === id) o = x; });
+    return o ? o.name : id;
+  }
+
+  function grantTabs(){
+    var defs = [["board","공고 보드"],["match","기관 매칭"],["guide","준비 가이드"]];
+    return '<div class="gtabs">' + defs.map(function(d){
+      return '<button class="gtab' + (grantView === d[0] ? " active" : "") + '" data-gview="' + d[0] + '">' + d[1] + '</button>';
+    }).join("") + '</div>';
+  }
+
+  function renderGrants(){
+    var body = document.getElementById("shBody");
+    if(grantView === "detail" && grantNoticeId){
+      renderGrantNotice(grantNoticeId);
+      return;
+    }
+    if(grantView === "match"){ body.innerHTML = grantTabs() + grantMatchHtml(); bindGrants(); return; }
+    if(grantView === "guide"){ body.innerHTML = grantTabs() + grantGuideHtml(); bindGrants(); return; }
+    body.innerHTML = grantTabs() + grantBoardHtml();
+    bindGrants();
+  }
+
+  function grantBoardHtml(){
+    var st = grantAll();
+    var list = GRANT_NOTICES.slice().sort(function(a,b){ return a.due.localeCompare(b.due); });
+    if(grantFilter !== "all"){
+      list = list.filter(function(n){ return n.orgs.indexOf(grantFilter) >= 0; });
+    }
+    var filters = '<div class="gfilters"><button class="fchip' + (grantFilter === "all" ? " active" : "") + '" data-gfilter="all">전체</button>'
+      + GRANT_ORGS.map(function(o){
+          return '<button class="fchip' + (grantFilter === o.id ? " active" : "") + '" data-gfilter="' + o.id + '">' + o.emoji + ' ' + esc(o.name) + '</button>';
+        }).join("") + '</div>';
+
+    var cards = list.map(function(n){
+      var s = noticeStats(st[n.id]);
+      var dd = dday(n.due);
+      var ddText = dd === 0 ? "D-DAY" : (dd > 0 ? "D-" + dd : dd + "일 지남");
+      var ddCls = dd < 0 ? "past" : (dd <= 3 ? "hot" : (dd <= 14 ? "soon" : ""));
+      var d = new Date(n.due + "T00:00:00");
+      return '<button class="notice" data-notice="' + n.id + '">'
+        + '<span class="nt-top"><span class="nt-title">' + esc(n.title) + '</span>'
+        + '<span class="dday ' + ddCls + '">' + ddText + '</span></span>'
+        + '<span class="nt-meta">' + esc(n.host) + ' · ' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + esc(n.at) + (n.verified ? '' : ' · 예시') + '</span>'
+        + '<span class="nt-tags">' + n.orgs.map(function(o){ return '<span class="tag">' + esc(orgName(o)) + '</span>'; }).join("") + '</span>'
+        + '<span class="nt-fit"><span class="fitbar"><i class="' + fitTone(n.fit) + '" style="width:' + n.fit + '%"></i></span><b>적합도 ' + n.fit + '</b></span>'
+        + '<span class="nt-prog">준비 ' + s.done + '/' + s.total + ' · ' + s.pct + '%</span>'
+        + '</button>';
+    }).join("");
+
+    return filters + '<div class="stack" style="gap:8px">' + cards + '</div>'
+      + '<div class="sh-note" style="margin-top:10px">공고는 확인된 2건과 예시 2~3건으로 구성했습니다. 실제 접수 전 공고문 원문의 자격·서류·마감을 다시 확인하세요.</div>';
+  }
+
+  function grantMatchHtml(){
+    var st = grantAll();
+    return GRANT_ORGS.map(function(o){
+      var mine = GRANT_NOTICES.filter(function(n){ return n.orgs.indexOf(o.id) >= 0; });
+      var bestFit = 0;
+      mine.forEach(function(n){ if(n.fit > bestFit) bestFit = n.fit; });
+      var active = mine.filter(function(n){ return dday(n.due) >= 0; }).length;
+      return '<div class="orgcard">'
+        + '<div class="oc-top"><span class="oc-emoji">' + o.emoji + '</span>'
+        + '<span class="oc-name">' + esc(o.name) + '</span>'
+        + '<span class="oc-count">' + mine.length + '건 · 최고 적합도 ' + bestFit + '</span></div>'
+        + '<div class="oc-tags">' + o.types.map(function(t){ return '<span class="tag amber">' + esc(t) + '</span>'; }).join("") + '</div>'
+        + '<div class="oc-desc">' + esc(o.desc) + '</div>'
+        + '<div class="oc-foot">진행 중 ' + active + '건 · 준비 ' + mine.reduce(function(s2, n){ return s2 + noticeStats(st[n.id]).done; }, 0) + '개 체크</div>'
+        + '<button class="btn sm" data-gfilter="' + o.id + '" data-gview="board">이 기관 공고 보기</button>'
+        + '</div>';
+    }).join("") + '<div class="sh-note" style="margin-top:10px">기관별 지원 유형에 맞춰 공고를 필터링합니다. 새 공고가 오면 이 목록에 추가하면 매칭이 갱신됩니다.</div>';
+  }
+
+  function grantGuideHtml(){
+    var plan = GRANT_PLAN.map(function(p){
+      return '<li><span class="b">' + p.n + '</span><span>' + esc(p.g) + '</span></li>';
+    }).join("");
+    return '<div class="sh-sec" style="margin-top:6px"><h3>사업계획서 5목차</h3><ul class="sh-list">' + plan + '</ul></div>'
+      + '<div class="sh-sec"><h3>필수 서류</h3><div class="pkg"><ul class="tasks">'
+      + GRANT_DOCS.map(function(d){ return '<li><span class="task" style="cursor:default"><span class="box">·</span><span class="tx">' + esc(d) + '</span></span></li>'; }).join("")
+      + '</ul></div></div>'
+      + '<div class="sh-sec"><h3>협약 · 정산</h3><ul class="sh-list">'
+      + GRANT_AGREE.map(function(g){ return '<li><span class="b">·</span><span>' + esc(g) + '</span></li>'; }).join("")
+      + '</ul></div>'
+      + '<div class="sh-note">공고를 열면 같은 항목이 체크리스트로 바뀌어, 자격 확인부터 정산까지 한 화면에서 진행할 수 있습니다.</div>';
+  }
+
+  function renderGrantNotice(id){
+    var n = noticeById(id);
+    var st = grantAll()[id];
+    var s = noticeStats(st);
+    var dd = dday(n.due);
+    var ddText = dd === 0 ? "D-DAY" : (dd > 0 ? "D-" + dd : dd + "일 지남");
+    var d = new Date(n.due + "T00:00:00");
+
+    function task(k, label, hint, extraCls){
+      var on = st.done.indexOf(k) >= 0;
+      return '<li><button class="task' + (on ? " checked" : "") + '" data-gk="' + k + '" aria-pressed="' + (on ? "true" : "false") + '">'
+        + '<span class="box">✓</span><span class="tx">' + esc(label) + (hint ? '<small class="hint">' + esc(hint) + '</small>' : '') + '</span></button></li>';
+    }
+
+    document.getElementById("shBody").innerHTML =
+      '<button class="backbtn" data-gview="board">← 공고 목록</button>'
+      + '<div class="dt-top"><span class="dday ' + (dd <= 3 ? "hot" : (dd <= 14 ? "soon" : "")) + '">' + ddText + '</span>'
+      + (n.verified ? '<span class="tag green">확인된 공고</span>' : '<span class="tag">예시 공고</span>') + '</div>'
+      + '<h2 class="dt-title">' + esc(n.title) + '</h2>'
+      + '<div class="dt-meta">' + esc(n.host) + ' · 마감 ' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + esc(n.at) + '</div>'
+      + '<div class="dt-note">' + esc(n.note) + '</div>'
+      + '<div class="pp-meta" style="margin-top:10px"><span id="gdLabel">준비 ' + s.done + '/' + s.total + '</span><span id="gdPct">' + s.pct + '%</span></div>'
+      + '<div class="prog"><i id="gdBar" style="width:' + s.pct + '%"></i></div>'
+      + '<div class="sh-sec"><h3>1. 자격 체크</h3><div class="pkg"><ul class="tasks">'
+      + GRANT_ELIG.map(function(t, i){ return task("e"+(i+1), t); }).join("")
+      + '</ul></div></div>'
+      + '<div class="sh-sec"><h3>2. 필수 서류</h3><div class="pkg"><ul class="tasks">'
+      + GRANT_DOCS.map(function(t, i){ return task("d"+(i+1), t); }).join("")
+      + '</ul></div></div>'
+      + '<div class="sh-sec"><h3>3. 사업계획서 5목차</h3><div class="pkg"><ul class="tasks">'
+      + GRANT_PLAN.map(function(p, i){ return task("p"+(i+1), p.n, p.g); }).join("")
+      + '</ul></div></div>'
+      + '<div class="sh-sec"><h3>4. 협약 · 정산</h3><div class="pkg"><ul class="tasks">'
+      + GRANT_AGREE.map(function(t, i){ return task("g"+(i+1), t); }).join("")
+      + '</ul></div></div>'
+      + '<div class="sh-sec"><h3>공고 메모</h3>'
+      + '<textarea id="grantMemo" rows="3" placeholder="이 공고에서 확인할 점·담당·연락처">' + esc(st.memo) + '</textarea>'
+      + '<div style="display:flex;justify-content:flex-end;margin-top:8px"><button class="btn" id="grantMemoSave" type="button">메모 저장</button></div></div>'
+      + '<div class="sh-note">체크는 이 브라우저에 저장되고, 지원사업 책상 진행률(가장 앞선 공고 기준)에 반영됩니다.</div>';
+
+    bindGrants();
+  }
+
+  function bindGrants(){
+    var body = document.getElementById("shBody");
+
+    Array.prototype.forEach.call(body.querySelectorAll("[data-gview]"), function(b){
+      b.addEventListener("click", function(){
+        grantView = b.getAttribute("data-gview");
+        if(grantView !== "detail"){ grantNoticeId = null; }
+        renderGrants();
+      });
+    });
+
+    Array.prototype.forEach.call(body.querySelectorAll("[data-gfilter]"), function(b){
+      b.addEventListener("click", function(){
+        grantFilter = b.getAttribute("data-gfilter");
+        grantView = "board";
+        grantNoticeId = null;
+        renderGrants();
+      });
+    });
+
+    Array.prototype.forEach.call(body.querySelectorAll("[data-notice]"), function(b){
+      b.addEventListener("click", function(){
+        grantNoticeId = b.getAttribute("data-notice");
+        grantView = "detail";
+        renderGrants();
+      });
+    });
+
+    Array.prototype.forEach.call(body.querySelectorAll("[data-gk]"), function(b){
+      b.addEventListener("click", function(){
+        var k = b.getAttribute("data-gk");
+        var state = grantAll();
+        var arr = state[grantNoticeId].done;
+        var i = arr.indexOf(k);
+        if(i >= 0){ arr.splice(i, 1); } else { arr.push(k); }
+        grantSave(state);
+        var on = i < 0;
+        b.classList.toggle("checked", on);
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+        var s = noticeStats(state[grantNoticeId]);
+        var lab = document.getElementById("gdLabel");
+        if(lab) lab.textContent = "준비 " + s.done + "/" + s.total;
+        var pct = document.getElementById("gdPct");
+        if(pct) pct.textContent = s.pct + "%";
+        var bar = document.getElementById("gdBar");
+        if(bar) bar.style.width = s.pct + "%";
+        updateDeskProgress();
+        buildStatus();
+        buildGrantHub();
+      });
+    });
+
+    var ms = document.getElementById("grantMemoSave");
+    if(ms){
+      ms.addEventListener("click", function(){
+        var state = grantAll();
+        state[grantNoticeId].memo = document.getElementById("grantMemo").value;
+        grantSave(state);
+        toast("공고 메모를 저장했습니다");
+      });
+    }
+  }
+
+  function openGrants(view, orgId, noticeId){
+    if(orgId){ grantFilter = orgId; }
+    grantView = view || "board";
+    grantNoticeId = noticeId || null;
+    document.getElementById("shTitle").textContent = "지원사업 비서";
+    document.getElementById("shSub").textContent = "공고 매칭 · 서류 · 협약까지";
+    renderGrants();
+    openSheet();
+  }
+
+  function buildGrantHub(){
+    var host = document.getElementById("grantHub");
+    if(!host) return;
+    var st = grantAll();
+    var live = GRANT_NOTICES.filter(function(n){ return dday(n.due) >= 0; })
+      .sort(function(a,b){ return a.due.localeCompare(b.due); });
+    var nearest = live[0];
+    var bestFit = 0;
+    live.forEach(function(n){ if(n.fit > bestFit) bestFit = n.fit; });
+    var top = live.slice(0, 3).map(function(n){
+      var s = noticeStats(st[n.id]);
+      var dd = dday(n.due);
+      return '<button class="gmini" data-gopen="' + n.id + '">'
+        + '<span class="gm-t"><span class="gm-name">' + esc(n.title) + '</span>'
+        + '<span class="dday ' + (dd <= 3 ? "hot" : (dd <= 14 ? "soon" : "")) + '">D-' + dd + '</span></span>'
+        + '<span class="gm-p">준비 ' + s.pct + '% · 적합도 ' + n.fit + '</span></button>';
+    }).join("");
+    host.innerHTML = '<div class="grant-card">'
+      + '<div class="gc-top"><span class="gc-title">🎯 지원사업 비서</span>'
+      + '<span class="gc-badge">진행 ' + live.length + '건</span></div>'
+      + '<div class="gc-sub">가이스트 · 유누스코리아 · 린스크 3개 트랙 매칭 · 자격→서류→계획서→협약 원스톱</div>'
+      + '<div class="gc-stats"><span>가장 급한 마감 <b>' + (nearest ? (nearest.due.slice(5).replace("-","/") + " " + nearest.at) : "-") + '</b></span>'
+      + '<span>최고 적합도 <b>' + bestFit + '</b></span></div>'
+      + '<div class="' + 'gminis' + '">' + top + '</div>'
+      + '<button class="btn sm" data-gopen="board">지원사업 비서 열기</button>'
+      + '</div>';
   }
 
   /* ───────── 저장소 ───────── */
@@ -1584,7 +1977,7 @@
       html += '<button class="desk'+(d.busy?" busy":"")+'" data-st="'+d.st+'" data-id="'+d.id+'"'
         + ' style="left:'+COLX[d.col-1]+'%;top:'+ROWY[d.row-1]+'%"'
         + ' aria-label="'+esc(d.name+" · "+STATUS_TEXT[d.st])+'" title="'+esc(d.name)+'">'
-        + '<span class="face"><img src="./avatar.png" alt=""></span>'
+        + '<span class="ring" data-ring="'+d.id+'"><span class="face"><img src="./avatar.png" alt=""></span></span>'
         + '<span class="badge">'+badge+'</span>'
         + '</button>';
     });
@@ -1722,13 +2115,19 @@
     var el = document.getElementById("statusList");
     el.innerHTML = sorted.map(function(d){
       var wf = WORKFLOWS[d.id];
-      var pct = wf ? deskAvgPct(d.id, wst) : 0;
+      var pct = wf ? deskPct(d.id, wst) : 0;
       sumPct += pct;
       var sub = "";
       if(wf){
-        var first = wf.tracks[0];
-        var fs = wfStats(first, wst[d.id][first.id]);
-        sub = '<small class="nm-sub">' + (wf.tracks.length > 1 ? wf.tracks.length + "트랙 · " : "") + "현재 " + fs.stage + "단계 · " + fs.done + "/" + fs.total + '</small>';
+        if(d.id === "gov"){
+          var liveN = 0;
+          GRANT_NOTICES.forEach(function(n){ if(dday(n.due) >= 0) liveN++; });
+          sub = '<small class="nm-sub">지원사업 비서 · 진행 ' + liveN + '건 매칭</small>';
+        } else {
+          var first = wf.tracks[0];
+          var fs = wfStats(first, wst[d.id][first.id]);
+          sub = '<small class="nm-sub">' + (wf.tracks.length > 1 ? wf.tracks.length + "트랙 · " : "") + "현재 " + fs.stage + "단계 · " + fs.done + "/" + fs.total + '</small>';
+        }
       }
       return '<button class="desk-line" data-id="'+d.id+'">'
         + '<span class="mini"><img src="./avatar.png" alt=""></span>'
@@ -1851,6 +2250,7 @@
   }
 
   function openDesk(id){
+    if(id === "gov"){ openGrants("board"); return; }
     if(WORKFLOWS[id]){ openWorkflow(id); return; }
     var d = null;
     DESKS.forEach(function(x){ if(x.id === id) d = x; });
@@ -1892,8 +2292,13 @@
       + '<div class="sh-sec"><h3>지금 하는 일</h3><ul class="sh-list">'
       + b.items.map(function(i){ return '<li><span class="b">·</span><span>'+esc(i)+'</span></li>'; }).join("")
       + '</ul></div>'
-      + '<div class="sh-sec"><h3>다음 할 일</h3><div class="sh-note">'+esc(b.next)+'</div></div>';
+      + '<div class="sh-sec"><h3>다음 할 일</h3><div class="sh-note">'+esc(b.next)+'</div></div>'
+      + (["geist","yunus","linsk"].indexOf(b.id) >= 0
+          ? '<div class="sh-sec"><button class="btn" id="brandGrant" type="button">이 기관 지원사업 매칭 보기</button></div>'
+          : '');
     openSheet();
+    var bg = document.getElementById("brandGrant");
+    if(bg){ bg.addEventListener("click", function(){ closeSheet(); openGrants("board", b.id); }); }
   }
 
   /* ───────── 탭 ───────── */
@@ -1957,6 +2362,44 @@
     toast("메모를 삭제했습니다");
   });
 
+  /* PWA: 홈 화면 설치 유도 */
+  var deferredPrompt = null;
+  var installBar = document.getElementById("installBar");
+  function showInstallBar(){
+    if(!installBar || LS.get("kdu-install-dismissed", false)) return;
+    if(window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) return;
+    installBar.hidden = false;
+  }
+  window.addEventListener("beforeinstallprompt", function(e){
+    e.preventDefault();
+    deferredPrompt = e;
+    showInstallBar();
+  });
+  window.addEventListener("appinstalled", function(){
+    if(installBar) installBar.hidden = true;
+  });
+  var installBtn = document.getElementById("installBtn");
+  if(installBtn){
+    installBtn.addEventListener("click", function(){
+      if(deferredPrompt){
+        deferredPrompt.prompt();
+        deferredPrompt = null;
+      } else {
+        toast("브라우저 메뉴에서 ‘홈 화면에 추가’를 선택하세요");
+      }
+    });
+  }
+  var installClose = document.getElementById("installClose");
+  if(installClose){
+    installClose.addEventListener("click", function(){
+      installBar.hidden = true;
+      LS.set("kdu-install-dismissed", true);
+    });
+  }
+  if(/iphone|ipad|ipod/i.test(navigator.userAgent) && !window.navigator.standalone){
+    showInstallBar();
+  }
+
   buildDesks();
   buildBoard();
   buildSchedule();
@@ -1965,9 +2408,18 @@
   buildRoutines();
   buildStatus();
   buildWorkroomHub();
+  buildGrantHub();
+  updateDeskProgress();
   document.getElementById("paperHub").addEventListener("click", function(e){
     var b = e.target.closest("[data-ptrack]");
     if(b){ openWorkflow("irb", b.getAttribute("data-ptrack")); }
+  });
+  document.getElementById("grantHub").addEventListener("click", function(e){
+    var b = e.target.closest("[data-gopen]");
+    if(!b) return;
+    var v = b.getAttribute("data-gopen");
+    if(v === "board"){ openGrants("board"); }
+    else { openGrants("detail", "all", v); }
   });
   document.getElementById("exDate").value = todayStr();
   renderLedger();
