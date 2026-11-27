@@ -3,7 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#4A3527">
+<meta name="theme-color" content="#5c3d2e">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="김동욱 비서실">
+<meta name="application-name" content="김동욱 비서실">
 <title>김동욱 비서실</title>
 <style>
   :root{
@@ -314,6 +322,87 @@
   .rt h3{margin:0;font-size:12px;font-weight:800;letter-spacing:-.03em;color:#3B2A1E}
   .rt p{margin:3px 0 0;font-size:10.5px;line-height:1.55;color:#6E5A47;letter-spacing:-.02em}
   .pause{font-size:9px;font-weight:800;color:#9C4426;background:rgba(176,84,52,.12);border:1px solid rgba(176,84,52,.28);border-radius:6px;padding:2px 6px}
+  /* ── 논문 파이프라인 ────────────────── */
+  .track-tabs{display:flex;gap:6px;margin:10px 0 12px}
+  .track{
+    flex:1;text-align:left;padding:8px 10px;border-radius:12px;cursor:pointer;
+    border:1px solid var(--line-2);background:linear-gradient(180deg,#FFFDF7,#F8F0DF);
+    font-family:var(--sans);color:#5B4635;display:flex;flex-direction:column;gap:2px;
+  }
+  .track b{font-size:11px;font-weight:800;letter-spacing:-.03em}
+  .track span{font-size:9px;font-weight:700;color:var(--muted)}
+  .track.active{background:linear-gradient(180deg,#75513A,#4A3527);border-color:#3A2A1E;color:#FFF7E9;box-shadow:0 5px 12px rgba(74,53,39,.24)}
+  .track.active span{color:#E3C48D}
+  .pp-topic{font-family:var(--serif);font-size:14px;font-weight:700;color:#3B2A1E;letter-spacing:-.02em;line-height:1.35;word-break:keep-all}
+  .pp-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:7px;font-size:9.5px;font-weight:800;color:#8A6A46;letter-spacing:-.02em}
+  .stages{margin-top:12px;display:flex;flex-direction:column;gap:7px}
+  .stage{border:1px solid var(--line);border-radius:13px;background:linear-gradient(180deg,#FFFDF7,#FAF2E2);overflow:hidden}
+  .stage.now{border-color:rgba(196,136,60,.45);box-shadow:0 2px 8px rgba(196,136,60,.12)}
+  .st-head{width:100%;display:flex;align-items:center;gap:8px;padding:10px 11px;background:none;border:0;cursor:pointer;font-family:var(--sans);text-align:left}
+  .st-no{flex:0 0 20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;background:rgba(107,74,51,.12);color:#6B4A33}
+  .stage.done .st-no{background:rgba(63,107,80,.16);color:#2F5A3C}
+  .stage.now .st-no{background:linear-gradient(180deg,#D8A657,#C4883C);color:#4A2E0B}
+  .st-name{flex:1;min-width:0;font-size:11px;font-weight:800;color:#3B2A1E;letter-spacing:-.03em;line-height:1.35;word-break:keep-all}
+  .st-state{flex:0 0 auto;font-size:8.5px;font-weight:800;border-radius:6px;padding:2px 6px;background:rgba(107,74,51,.08);color:#6B4A33;white-space:nowrap}
+  .stage.done .st-state{background:rgba(63,107,80,.13);color:#2F5A3C}
+  .stage.now .st-state{background:rgba(196,136,60,.17);color:#8A5A1E}
+  .st-body{display:none;padding:0 11px 10px 39px}
+  .stage.open .st-body{display:block}
+  .tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+  .task{display:flex;gap:7px;align-items:flex-start;width:100%;text-align:left;background:none;border:0;padding:2px 0;cursor:pointer;font-family:var(--sans);font-size:10.5px;line-height:1.5;color:#5B4635;letter-spacing:-.02em}
+  .task .box{flex:0 0 14px;width:14px;height:14px;border-radius:4px;border:1.5px solid rgba(107,74,51,.35);display:flex;align-items:center;justify-content:center;font-size:9px;color:transparent;margin-top:1px}
+  .task.checked .box{background:linear-gradient(180deg,#3F6B50,#2E4A38);border-color:#2E4A38;color:#FFF6E4}
+  .task.checked .tx{color:#A28C77;text-decoration:line-through;text-decoration-thickness:1px}
+  .st-out{margin-top:8px;font-size:9.5px;font-weight:700;color:#8A6A46;letter-spacing:-.02em;background:rgba(107,74,51,.05);border-radius:8px;padding:5px 8px;word-break:keep-all}
+  .paper-card{
+    text-align:left;width:100%;padding:12px 13px;border-radius:15px;cursor:pointer;
+    border:1px solid var(--line);background:linear-gradient(180deg,#FFFCF6,#FBF4E6);
+    box-shadow:0 2px 7px rgba(74,53,39,.05);font-family:var(--sans);color:var(--ink);
+  }
+  .paper-card:active{transform:scale(.99)}
+  .pc-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .pc-name{font-family:var(--serif);font-size:13px;font-weight:700;color:#3B2A1E;letter-spacing:-.02em}
+  .pc-stage{flex:0 0 auto;font-size:9px;font-weight:800;border-radius:6px;padding:2px 7px;background:rgba(196,136,60,.15);color:#8A5A1E;border:1px solid rgba(196,136,60,.28);white-space:nowrap}
+  .pc-topic{margin-top:3px;font-size:10px;color:#8A7565;font-weight:600;letter-spacing:-.02em;word-break:keep-all}
+  .segs{display:flex;gap:3px;margin-top:9px}
+  .segs i{flex:1;height:5px;border-radius:99px;background:rgba(107,74,51,.13);position:relative;overflow:hidden;display:block}
+  .segs i b{position:absolute;top:0;bottom:0;left:0;background:linear-gradient(90deg,#C4883C,#D8A657);border-radius:99px;display:block}
+  .pc-foot{display:flex;justify-content:space-between;margin-top:7px;font-size:9px;font-weight:800;color:#8A6A46;letter-spacing:-.02em}
+  .nm-sub{display:block;margin-top:1px;font-size:9px;font-weight:700;color:#A28C77;letter-spacing:-.02em}
+  .pcnt{flex:0 0 auto;font-size:9.5px;font-weight:800;color:#8A6A46;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  /* ── 목표 트랙 ─────────────────────── */
+  .goal-card{
+    border-radius:16px;padding:13px 14px;color:#F6E9D4;position:relative;overflow:hidden;
+    background:linear-gradient(150deg,#4A3527,#3A2A1E);border:1px solid rgba(0,0,0,.28);
+    box-shadow:0 8px 18px rgba(58,42,30,.22);
+  }
+  .goal-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(80% 60% at 100% 0%,rgba(216,166,87,.22),transparent 60%)}
+  .g-k{position:relative;font-size:9.5px;font-weight:800;color:#C9B48F;letter-spacing:.04em}
+  .g-v{position:relative;margin-top:3px;font-family:var(--serif);font-size:15px;font-weight:700;color:#FFF6E4;letter-spacing:-.02em;line-height:1.35;word-break:keep-all}
+  .g-sub{position:relative;margin-top:5px;font-size:9.5px;font-weight:700;color:#D9C6A4;letter-spacing:-.02em;line-height:1.5}
+  .goal-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:10px 0 0}
+  .goal-row .lab{font-size:9.5px;font-weight:800;color:#8A6A46;letter-spacing:-.02em}
+  .goal-seg{display:flex;gap:4px;background:rgba(107,74,51,.07);border:1px solid var(--line);border-radius:999px;padding:3px}
+  .goal-btn{
+    appearance:none;border:0;background:transparent;cursor:pointer;font-family:var(--sans);
+    font-size:10px;font-weight:800;color:#8A7565;letter-spacing:-.02em;border-radius:999px;padding:5px 10px;
+  }
+  .goal-btn.active{background:linear-gradient(180deg,#75513A,#4A3527);color:#FFF7E9;box-shadow:0 3px 8px rgba(74,53,39,.22)}
+  .goal-line{
+    margin-top:8px;padding:8px 10px;border-radius:10px;font-size:10px;font-weight:700;line-height:1.5;
+    color:#7A5318;background:rgba(216,166,87,.14);border:1px dashed rgba(154,106,32,.38);letter-spacing:-.02em;word-break:keep-all;
+  }
+  .goal-line b{color:#5E3E0C;font-weight:900}
+  .pkg-count{font-size:9px;font-weight:800;color:#8A5A1E;background:rgba(196,136,60,.16);border:1px solid rgba(196,136,60,.3);border-radius:6px;padding:1px 6px;margin-left:4px;letter-spacing:-.02em}
+  .pkg{border:1px solid rgba(154,106,32,.28);border-radius:12px;background:linear-gradient(180deg,#FFFCF2,#FBF1DC);padding:10px 11px}
+  .pkg .task{padding:3px 0}
+  .pkg.done{border-color:rgba(63,107,80,.4);background:linear-gradient(180deg,#F7FBF4,#EEF6EA)}
+  .finish{
+    margin-top:9px;display:flex;align-items:center;gap:8px;border-radius:11px;padding:9px 11px;
+    background:linear-gradient(90deg,#2E4A38,#3F6B50);color:#EAF3E2;font-size:10.5px;font-weight:800;
+    letter-spacing:-.02em;line-height:1.5;box-shadow:0 5px 14px rgba(46,74,56,.25);
+  }
+  .finish.off{background:linear-gradient(90deg,rgba(107,74,51,.08),rgba(107,74,51,.05));color:#8A6A46;box-shadow:none;border:1px dashed rgba(107,74,51,.28)}
   /* ── forms ───────────────────────────── */
   .field{display:flex;flex-direction:column;gap:5px}
   .field label{font-size:10px;font-weight:800;color:var(--muted);letter-spacing:-.02em;padding-left:2px}
@@ -536,6 +625,9 @@
 
     <!-- ── 5. 작업실 ────────────────────── -->
     <section class="panel" id="panel-work" role="tabpanel" hidden>
+      <div class="sec"><h2>논문 파이프라인</h2><span class="cnt">2트랙 · SSCI/KCI</span></div>
+      <div class="goal-card" id="goalCard"></div>
+      <div class="stack" id="paperHub" style="margin-top:9px"></div>
       <div class="sec"><h2>작업실 — 진행 중</h2><span class="cnt">4개 작업</span></div>
       <div class="stack" id="workList"></div>
     </section>
@@ -549,12 +641,18 @@
         <div class="stat alert"><b id="c-alert">0</b><span>확인필요</span></div>
         <div class="stat done"><b id="c-done">0</b><span>완료</span></div>
       </div>
-      <div class="card pad" style="margin-bottom:11px">
+      <div class="card pad" style="margin-bottom:9px">
         <div style="display:flex;justify-content:space-between;font-size:10.5px;font-weight:800;color:#6E5A47;letter-spacing:-.02em">
           <span>오늘 가동률</span><span id="onRate">0%</span>
         </div>
         <div class="prog green"><i id="onBar" style="width:0%"></i></div>
-        <div style="margin-top:8px;font-size:9.5px;color:#A28C77;letter-spacing:-.02em;line-height:1.5">가동 + 완료를 정상 처리로 계산했습니다. 책상을 누르면 상세가 열립니다.</div>
+      </div>
+      <div class="card pad" style="margin-bottom:11px">
+        <div style="display:flex;justify-content:space-between;font-size:10.5px;font-weight:800;color:#6E5A47;letter-spacing:-.02em">
+          <span>전체 워크플로 진행률</span><span id="wfAllPct">0%</span>
+        </div>
+        <div class="prog"><i id="wfAllBar" style="width:0%"></i></div>
+        <div style="margin-top:8px;font-size:9.5px;color:#A28C77;letter-spacing:-.02em;line-height:1.5">15개 책상의 단계 체크를 합산한 값입니다. 책상을 누르면 단계별 워크플로가 열립니다.</div>
       </div>
       <div class="stack" id="statusList"></div>
     </section>
@@ -912,6 +1010,534 @@
     {time:"주 1회", when:"검토", emoji:"🧭", name:"탐색 제안 검토", desc:"동욱 님께 올려 둔 탐색 탭 제안을 다시 살펴 정리합니다.", paused:false}
   ];
 
+  /* ───────── 15개 책상 워크플로 ───────── */
+  var WKEY = "kdu-office-progress-v1";
+
+  var WORKFLOWS = {
+    gov: {sub:"정부사업 · 공고 대응", tracks:[{
+      id:"g1", label:"부산 사회적경제 공고", topic:"임팩트 투자 연계 · 팝업빌리지 2건",
+      deliverable:"지원사업 신청서 제출본 + 접수 확인증",
+      stages:[
+        {icon:"🔎", name:"공고 스캔 · 자격 확인", tasks:["지원센터 신규 공고 확인","자격요건·마감일 정리","자사 적합도 1차 판단"], out:"공고 요약 1장"},
+        {icon:"📐", name:"요건 분석 · 준비물", tasks:["지원 자격·제외 요건 대조","평가 배점표 분석","필요 증빙 목록화"], out:"요건 체크리스트"},
+        {icon:"✍️", name:"신청서 작성", tasks:["문제정의·사업계획 요약","성과목표·지표 설계","예산·인력 계획"], out:"신청서 초안"},
+        {icon:"📤", name:"제출 · 접수 확인", tasks:["첨부서류 최종 점검","온라인 접수","접수번호·제출본 보관"], out:"접수 완료"}
+      ],
+      pack:["신청서 제출 완료","접수 확인증 보관","결과 발표일 캘린더 등록"],
+      done:["s1t1","s1t2","s1t3","s2t1"]
+    }]},
+
+    academy: {sub:"산학협력 · 시제품 납품", tracks:[{
+      id:"a1", label:"앵커(RISE) 산학협력", topic:"산학공동기술개발 · 시제품 2건 납품",
+      deliverable:"납품 검수 완료 + 정산 서류 일체",
+      stages:[
+        {icon:"🤝", name:"과제 수행 점검", tasks:["과제 범위·일정 재확인","산학협력단 담당자 소통","중간 산출물 정리"], out:"과제 진행표"},
+        {icon:"🛠️", name:"시제품 완성", tasks:["홍보용 웹·물품 마감","에세이북 편집·인쇄","검수용 사진 촬영"], out:"시제품 2종"},
+        {icon:"🧾", name:"납품 서류", tasks:["세금계산서 국비/기업부담 분리","거래명세서·검수조서","사업자등록증·통장사본"], out:"납품 서류 6종"},
+        {icon:"🏢", name:"현장점검 대응", tasks:["방문 일정 확정","현장 자료·출입 준비","점검 의견 반영"], out:"점검 결과 반영"}
+      ],
+      pack:["납품 검수 완료","세금계산서 발행·전달","과제 정산 서류 보관"],
+      done:["s1t1","s1t2","s1t3"]
+    }]},
+
+    brief: {sub:"비서실 · 브리핑 데스크", tracks:[{
+      id:"b1", label:"오늘의 브리핑", topic:"아침 브리핑 1회분 (일정·마감·메일)",
+      deliverable:"브리핑 카드 1장 + 내일 브리핑 예약",
+      stages:[
+        {icon:"📥", name:"수집", tasks:["밤사이 메일 확인","오늘 일정·마감 추출","뉴스·정책 클리핑"], out:"원자료 묶음"},
+        {icon:"🧭", name:"정리", tasks:["우선순위 3건 선정","의사결정 필요 항목 표시","보류·위임 항목 분리"], out:"우선순위 목록"},
+        {icon:"📨", name:"전달", tasks:["브리핑 카드 작성","확인 대기 질문 정리","후속 알림 예약"], out:"브리핑 발송"},
+        {icon:"🗂️", name:"기록", tasks:["결정 사항 기록","다음 브리핑에 반영","주간 요약에 누적"], out:"결정 로그"}
+      ],
+      pack:["오늘 브리핑 발송 완료","확인 대기 3건 추적","내일 06:04 브리핑 예약"],
+      done:["s1t1","s1t2","s1t3","s2t1","s2t2","s2t3","s3t1","s3t2","s3t3","s4t1","s4t2","s4t3","p1","p2","p3"]
+    }]},
+
+    b2b: {sub:"가이스트 · B2B 영업", tracks:[{
+      id:"c1", label:"B2B 제안 파이프라인", topic:"기관·기업 제안 5건 중 우선 2건",
+      deliverable:"제안서 발송 + 견적 확정본",
+      stages:[
+        {icon:"🔍", name:"리드 발굴", tasks:["타깃 기관·기업 리스트","접점·소개 경로 확인","우선순위 5곳 선정"], out:"타깃 리스트"},
+        {icon:"🧩", name:"제안 준비", tasks:["문제정의·제안 가치 정리","레퍼런스·사례 정리","제안서 목차 확정"], out:"제안서 초안"},
+        {icon:"💰", name:"견적·협상", tasks:["원가·마진 계산","견적서 금액·연도 검산","조건 협의"], out:"견적 확정본"},
+        {icon:"📝", name:"계약·이행", tasks:["계약서 검토","일정·담당 확정","이행 체크"], out:"계약·일정표"}
+      ],
+      pack:["제안서 발송 완료","견적 확정본 보관","계약·발주 확인"],
+      done:["s1t1","s1t2"]
+    }]},
+
+    global: {sub:"유누스코리아 · 글로벌", tracks:[{
+      id:"d1", label:"평창군 청소년 캠프", topic:"지역자원 교육캠프 · 그린바이오 아카데미",
+      deliverable:"캠프 운영 완료 + 결과 보고서",
+      stages:[
+        {icon:"🗓️", name:"기획", tasks:["평창군·연구팀 일정 확인","대상·목표 설정","프로그램 구성"], out:"프로그램 기획안"},
+        {icon:"📚", name:"교안", tasks:["강의안 목차","활동·워크숍 설계","자료·슬라이드"], out:"강의안 최종본"},
+        {icon:"🎒", name:"운영 준비", tasks:["장소·숙박·이동","진행 스태프 역할","안전·동의서"], out:"운영 매뉴얼"},
+        {icon:"🏕️", name:"실행·정산", tasks:["캠프 운영","만족도·결과 정리","정산·보고"], out:"결과 보고서"}
+      ],
+      pack:["강의안 최종본 전달","캠프 운영 완료","결과 보고서 제출"],
+      done:["s1t1","s1t2"]
+    }]},
+
+    tax: {sub:"가이스트 · 린스크", tracks:[{
+      id:"e1", label:"납품 정산 · 세무", topic:"세금계산서 발행과 월 마감",
+      deliverable:"세금계산서 발행 완료 + 증빙 백업",
+      stages:[
+        {icon:"📎", name:"증빙 정리", tasks:["발행 대상·금액 정리","거래명세서 작성","증빙 스캔·보관"], out:"증빙 묶음"},
+        {icon:"🧾", name:"발행", tasks:["국비/기업부담 분리 발행","전자세금계산서 전송","수정·취소 관리"], out:"세금계산서 2부"},
+        {icon:"📊", name:"신고·마감", tasks:["과세표준 확인","비용 증빙 누락 점검","월 마감"], out:"월 마감표"},
+        {icon:"✅", name:"확인", tasks:["입금 대사","미수금 체크","세무 확인 항목 기록"], out:"입금 대사표"}
+      ],
+      pack:["세금계산서 발행 완료","입금 확인","증빙 파일 백업"],
+      done:["s1t1","s1t2","s1t3"]
+    }]},
+
+    irb: {sub:"부산대 · 연구", goalable:true, tracks:[
+      {id:"A", label:"연구 트랙 A", topic:"사회적기업 창업가의 정당성 내러티브", goal:"SSCI",
+       deliverableTpl:"{goal} 저널 투고 완료 원고 1편",
+       stages:[
+         {icon:"🔍", name:"주제 발굴 · 갭 분석", tasks:["키워드·트렌드 스캔","연구 질문(RQ) 3안 도출","기존 문헌 공백(gap) 정리"], out:"RQ 3안 + 갭 맵 1장"},
+         {icon:"📚", name:"문헌조사 · 선행연구 매트릭스", tasks:["핵심 논문 요약 테이블","이론적 프레임워크 선정","참고문헌 정리(서지관리)"], out:"선행연구 매트릭스 + 이론 프레임"},
+         {icon:"🧪", name:"연구설계 · 데이터/IRB", tasks:["연구모형·가설/질문지 설계","IRB 심의 제출","수정요청 보완 대응"], out:"연구설계서 + IRB 승인"},
+         {icon:"✍️", name:"초안 작성 · 영문 교정", tasks:["서론→이론배경→방법론→결과→논의","아카데믹 톤·문장 점검","레퍼런스·표·그림 점검"], out:"Full draft + 교정본"},
+         {icon:"📮", name:"저널 투고 · 리뷰어 대응", tasks:["타깃 저널 매칭·커버레터","Response Matrix 작성","수정본 R1/R2 추적"], out:"투고본 + Response Matrix"}
+       ],
+       pack:["본문 원고 최종본", {t:"초록", alt:{SSCI:"영문 초록(250단어 이내)", KCI:"국문 초록 + 영문 초록"}}, "레퍼런스 양식 통일", "IRB 승인서", "Cover Letter", "Response Matrix"],
+       done:["s1t1","s1t2","s1t3","s2t1","s2t2","s2t3","s3t1","s3t2","s3t3","s4t1","s4t2"]},
+      {id:"B", label:"연구 트랙 B", topic:"사회적경제 조직의 지속가능성과 파트너십", goal:"KCI",
+       deliverableTpl:"{goal} 저널 투고 완료 원고 1편",
+       stages:[
+         {icon:"🔍", name:"주제 발굴 · 갭 분석", tasks:["키워드·트렌드 스캔","연구 질문(RQ) 3안 도출","기존 문헌 공백(gap) 정리"], out:"RQ 3안 + 갭 맵 1장"},
+         {icon:"📚", name:"문헌조사 · 선행연구 매트릭스", tasks:["핵심 논문 요약 테이블","이론적 프레임워크 선정","참고문헌 정리(서지관리)"], out:"선행연구 매트릭스 + 이론 프레임"},
+         {icon:"🧪", name:"연구설계 · 데이터/IRB", tasks:["연구모형·가설/질문지 설계","IRB 심의 제출","수정요청 보완 대응"], out:"연구설계서 + IRB 승인"},
+         {icon:"✍️", name:"초안 작성 · 영문 교정", tasks:["서론→이론배경→방법론→결과→논의","아카데믹 톤·문장 점검","레퍼런스·표·그림 점검"], out:"Full draft + 교정본"},
+         {icon:"📮", name:"저널 투고 · 리뷰어 대응", tasks:["타깃 저널 매칭·커버레터","Response Matrix 작성","수정본 R1/R2 추적"], out:"투고본 + Response Matrix"}
+       ],
+       pack:["본문 원고 최종본", {t:"초록", alt:{SSCI:"영문 초록(250단어 이내)", KCI:"국문 초록 + 영문 초록"}}, "레퍼런스 양식 통일", "IRB 승인서", "Cover Letter", "Response Matrix"],
+       done:["s1t1","s1t2","s1t3","s2t1"]}
+    ]},
+
+    pr: {sub:"개인 브랜딩", tracks:[{
+      id:"f1", label:"주간 콘텐츠", topic:"링크드인 글 1편 + 프로필 관리",
+      deliverable:"이번 주 링크드인 글 1편 발행",
+      stages:[
+        {icon:"💡", name:"소재", tasks:["주간 이슈 브리핑 확인","경험·인사이트 메모","타깃 독자 설정"], out:"소재 3개"},
+        {icon:"✏️", name:"작성", tasks:["훅·구조 잡기","사례·수치 보강","태그·링크 정리"], out:"글 초안"},
+        {icon:"🚀", name:"발행", tasks:["발행 시간 선택","이미지·링크 점검","댓글·반응 관리"], out:"발행 완료"},
+        {icon:"📈", name:"확산", tasks:["브런치 교차 발행","프로필·인물정보 링크","주간 성과 기록"], out:"성과 요약"}
+      ],
+      pack:["이번 주 글 1편 발행","프로필 링크 최신화","반응 요약 저장"],
+      done:["s1t1","s1t2"]
+    }]},
+
+    lecture: {sub:"부산대 국제전문대학원", tracks:[{
+      id:"h1", label:"2026-2학기 강의", topic:"NGOs and Global Civil Society",
+      deliverable:"기말 페이퍼 마감 + 성적 입력 완료",
+      stages:[
+        {icon:"🗺️", name:"강의 설계", tasks:["주차별 계획 점검","사례·읽기자료 선정","과제·평가 기준"], out:"강의계획서"},
+        {icon:"🎬", name:"수업 운영", tasks:["수업자료 업로드","발표자료 수합","피드백 정리"], out:"주차 자료 묶음"},
+        {icon:"📝", name:"평가", tasks:["기말 페이퍼 안내","제출물 취합","채점·이의 대응"], out:"평가 결과"},
+        {icon:"🎓", name:"마감·정리", tasks:["성적 입력","강의 평가 확인","다음 학기 개선 메모"], out:"학기 마감"}
+      ],
+      pack:["기말 페이퍼 제출 마감","성적 입력 완료","강의 아카이브 정리"],
+      done:["s1t1","s1t2","s1t3","s2t1"]
+    }]},
+
+    press: {sub:"언론 · 인터뷰", tracks:[{
+      id:"i1", label:"인터뷰·기고", topic:"요청 검토부터 게재 확인까지",
+      deliverable:"게재 완료 + 게재 링크 아카이브",
+      stages:[
+        {icon:"📩", name:"제안 검토", tasks:["인터뷰·기고 요청 확인","매체·주제 적합성","일정·분량 합의"], out:"수락 여부 결정"},
+        {icon:"🧠", name:"준비", tasks:["핵심 메시지 3개","사례·근거 자료","질문지·예상 답변"], out:"메시지 카드"},
+        {icon:"🎙️", name:"진행", tasks:["인터뷰·원고 작성","인용·수치 검증","최종 교정"], out:"게재 원고"},
+        {icon:"🔗", name:"마무리", tasks:["게재본 확인","링크 보관","후속 관계 정리"], out:"아카이브"}
+      ],
+      pack:["인터뷰·기고 완료","게재 링크 아카이브","프로필에 반영"],
+      done:["s1t1"]
+    }]},
+
+    docs: {sub:"가이스트 · 행정", tracks:[{
+      id:"j1", label:"납품·행정 서류", topic:"요구 서류 6종과 제출 사본",
+      deliverable:"서류 묶음 제출 완료 + 접수증",
+      stages:[
+        {icon:"📋", name:"목록화", tasks:["요구 서류 체크리스트","양식 최신본 확보","담당·기한 지정"], out:"서류 체크리스트"},
+        {icon:"🖊️", name:"작성", tasks:["기본 정보·사업자 서류","금액·계좌 검산","날인·서명"], out:"작성본"},
+        {icon:"🔍", name:"검토", tasks:["제출 전 3중 확인","PDF 변환·용량 점검","사본 보관"], out:"최종 PDF"},
+        {icon:"📮", name:"제출", tasks:["접수 채널 확인","제출·접수증","후속 요청 대응"], out:"접수증"}
+      ],
+      pack:["서류 묶음 제출 완료","접수증 보관","원본 백업"],
+      done:["s1t1","s1t2","s1t3"]
+    }]},
+
+    brunch: {sub:"글쓰기", tracks:[{
+      id:"k1", label:"브런치 연재", topic:"월 1~2편 · 브런치북 목차",
+      deliverable:"브런치 글 발행 + 브런치북 목차 반영",
+      stages:[
+        {icon:"🗂️", name:"글감", tasks:["글감 보관함 정리","독자·주제 정하기","제목 후보 3개"], out:"글감 카드"},
+        {icon:"🖋️", name:"초안", tasks:["구조·목차","사례·인용","1차 완성"], out:"초안"},
+        {icon:"🧽", name:"퇴고", tasks:["문장 다듬기","맞춤법·사실 확인","이미지·표"], out:"최종 원고"},
+        {icon:"📢", name:"발행", tasks:["발행 예약","링크드인 요약","반응 기록"], out:"발행 완료"}
+      ],
+      pack:["이번 달 글 발행","브런치북 목차 반영","아카이브 정리"],
+      done:["s1t1","s1t2","s1t3","s2t1"]
+    }]},
+
+    media: {sub:"강연 · 촬영", tracks:[{
+      id:"l1", label:"영상 아카이브", topic:"강연·인터뷰 클립 제작과 아카이브",
+      deliverable:"클립 1편 공개 + 원본 아카이브",
+      stages:[
+        {icon:"🎞️", name:"소재", tasks:["강연·인터뷰 영상 수집","클립 후보 구간 표시","주제·메시지"], out:"클립 후보 리스트"},
+        {icon:"✂️", name:"편집", tasks:["컷 편집","자막·타이틀","BGM·톤"], out:"편집본"},
+        {icon:"🔎", name:"검수", tasks:["사실·발언 확인","초상·저작권 확인","최종 파일"], out:"최종 파일"},
+        {icon:"🌐", name:"배포", tasks:["업로드·썸네일","채널 설명·태그","반응·지표 기록"], out:"공개 완료"}
+      ],
+      pack:["클립 1편 공개","원본 아카이브","다음 촬영 리스트"],
+      done:["s1t1"]
+    }]},
+
+    dev: {sub:"피클 · 자동화", tracks:[{
+      id:"m1", label:"자동화 · 이 비서실", topic:"루틴 운영과 대시보드 개선",
+      deliverable:"자동화 1건 가동 + 문서화",
+      stages:[
+        {icon:"🧭", name:"요구", tasks:["불편·반복업무 목록","자동화 후보 선정","데이터·권한 확인"], out:"자동화 후보표"},
+        {icon:"🧱", name:"설계", tasks:["흐름·예외 설계","저장 구조","테스트 계획"], out:"설계 메모"},
+        {icon:"⚙️", name:"구현", tasks:["스크립트·앱 구현","로컬 테스트","배포"], out:"동작하는 자동화"},
+        {icon:"🛰️", name:"운영", tasks:["스케줄 등록","실패 알림","결과 기록"], out:"운영 로그"}
+      ],
+      pack:["자동화 1건 가동","실패 알림 설정","문서화"],
+      done:["s1t1","s1t2","s1t3","s2t1","s2t2","s2t3","s3t1"]
+    }]},
+
+    yunus: {sub:"유누스코리아 재단", tracks:[{
+      id:"n1", label:"이사장 업무", topic:"재단 사업 · 캠프 · 이사회",
+      deliverable:"캠프 준비 완료 + 이사회 보고",
+      stages:[
+        {icon:"🧾", name:"사업 점검", tasks:["재단 사업 현황","파트너 소통","예산·일정"], out:"사업 현황표"},
+        {icon:"🏕️", name:"캠프 준비", tasks:["평창군 일정 확정","강의안·교재","운영 인력"], out:"캠프 준비물"},
+        {icon:"🏛️", name:"이사회·보고", tasks:["안건 정리","보고자료","회의 기록"], out:"보고자료"},
+        {icon:"🌱", name:"확장", tasks:["신규 파트너 발굴","SDGs 연계","성과 정리"], out:"성과 보고"}
+      ],
+      pack:["캠프 준비 완료","이사회 보고","연간 성과 정리"],
+      done:["s1t1","s1t2"]
+    }]}
+  };
+
+  function wfAll(){
+    var saved = LS.get(WKEY, {});
+    var out = {};
+    Object.keys(WORKFLOWS).forEach(function(deskId){
+      out[deskId] = {};
+      WORKFLOWS[deskId].tracks.forEach(function(t){
+        var s = (saved && saved[deskId] && saved[deskId][t.id]) || {};
+        out[deskId][t.id] = {
+          done: Array.isArray(s.done) ? s.done.slice() : (t.done || []).slice(),
+          memo: typeof s.memo === "string" ? s.memo : "",
+          goal: s.goal || t.goal || ""
+        };
+      });
+    });
+    return out;
+  }
+  function wfSave(state){ LS.set(WKEY, state); }
+
+  function packItemLabel(item, goal){
+    if(typeof item === "string") return item;
+    if(item.alt && item.alt[goal]) return item.alt[goal];
+    return item.t;
+  }
+  function wfTotal(track){
+    var n = 0;
+    track.stages.forEach(function(s){ n += s.tasks.length; });
+    return n + (track.pack ? track.pack.length : 0);
+  }
+  function stageDoneCount(track, n, done){
+    var c = 0;
+    track.stages[n-1].tasks.forEach(function(_, i){
+      if(done.indexOf("s"+n+"t"+(i+1)) >= 0) c++;
+    });
+    return c;
+  }
+  function wfStats(track, st){
+    var total = wfTotal(track);
+    var done = st.done.length;
+    if(done > total) done = total;
+    var stage = 1;
+    for(var i = 1; i <= track.stages.length; i++){
+      if(stageDoneCount(track, i, st.done) === track.stages[i-1].tasks.length){
+        stage = Math.min(track.stages.length, i + 1);
+      } else { break; }
+    }
+    return {done:done, total:total, pct: total ? Math.round(done/total*100) : 0, stage:stage};
+  }
+  function stageState(track, n, st){
+    var c = stageDoneCount(track, n, st.done);
+    if(c === track.stages[n-1].tasks.length) return "done";
+    var prev = true;
+    for(var k = 1; k < n; k++){
+      if(stageDoneCount(track, k, st.done) !== track.stages[k-1].tasks.length) prev = false;
+    }
+    return prev ? "now" : "todo";
+  }
+  function packDoneCount(track, st){
+    var c = 0;
+    if(!track.pack) return 0;
+    track.pack.forEach(function(_, i){ if(st.done.indexOf("p"+(i+1)) >= 0) c++; });
+    return c;
+  }
+  function deliverableText(track, st){
+    if(track.deliverableTpl) return track.deliverableTpl.replace("{goal}", st.goal || "");
+    return track.deliverable || "";
+  }
+  function findTrack(deskId, trackId){
+    var desk = WORKFLOWS[deskId];
+    var t = null;
+    desk.tracks.forEach(function(x){ if(x.id === trackId) t = x; });
+    return t || desk.tracks[0];
+  }
+
+  function renderWorkflow(deskId, trackId){
+    var desk = WORKFLOWS[deskId];
+    var state = wfAll();
+    var track = findTrack(deskId, trackId);
+    var st = state[deskId][track.id];
+    var s = wfStats(track, st);
+    var goal = st.goal || "";
+
+    var tabs = "";
+    if(desk.tracks.length > 1){
+      tabs = '<div class="track-tabs">' + desk.tracks.map(function(x){
+        var q = wfStats(x, state[deskId][x.id]);
+        return '<button class="track' + (x.id === track.id ? " active" : "") + '" data-wtrack="' + x.id + '">'
+          + '<b>' + esc(x.label) + '</b><span>' + (state[deskId][x.id].goal ? state[deskId][x.id].goal + " · " : "") + q.stage + '단계 · ' + q.pct + '%</span></button>';
+      }).join("") + '</div>';
+    }
+
+    var goalUi = "";
+    if(desk.goalable){
+      goalUi = '<div class="goal-row"><span class="lab">목표 트랙</span>'
+        + '<span class="goal-seg">'
+        + '<button class="goal-btn' + (goal === "SSCI" ? " active" : "") + '" data-goal="SSCI">SSCI 영문</button>'
+        + '<button class="goal-btn' + (goal === "KCI" ? " active" : "") + '" data-goal="KCI">KCI 국문</button>'
+        + '</span></div>'
+        + '<div class="goal-line">🎯 이번 사이클 목표 · <b>' + esc(goal) + ' 저널 투고 완료 원고 1편</b> — 5단계와 투고 패키지 6종을 모두 마치면 완성됩니다.</div>';
+    }
+
+    var stages = track.stages.map(function(sg, idx){
+      var n = idx + 1;
+      var ss = stageState(track, n, st);
+      var c = stageDoneCount(track, n, st.done);
+      var label = ss === "done" ? "완료" : (ss === "now" ? c + "/" + sg.tasks.length : "예정");
+      var open = (n === s.stage) ? " open" : "";
+      var tasks = sg.tasks.map(function(t, i){
+        var k = "s" + n + "t" + (i+1);
+        var on = st.done.indexOf(k) >= 0;
+        return '<li><button class="task' + (on ? " checked" : "") + '" data-k="' + k + '" aria-pressed="' + (on ? "true" : "false") + '">'
+          + '<span class="box">✓</span><span class="tx">' + esc(t) + '</span></button></li>';
+      }).join("");
+      return '<div class="stage ' + ss + open + '" data-stage="' + n + '">'
+        + '<button class="st-head" aria-expanded="' + (open ? "true" : "false") + '">'
+        + '<span class="st-no">' + n + '</span>'
+        + '<span class="st-name">' + sg.icon + ' ' + esc(sg.name) + '</span>'
+        + '<span class="st-state">' + label + '</span></button>'
+        + '<div class="st-body"><ul class="tasks">' + tasks + '</ul>'
+        + '<div class="st-out">📦 산출물 · ' + esc(sg.out) + '</div></div></div>';
+    }).join("");
+
+    var packHtml = "";
+    if(track.pack){
+      var pc = packDoneCount(track, st);
+      var allPack = pc === track.pack.length;
+      packHtml = '<div class="sh-sec"><h3>최종 산출물 <span class="pkg-count" id="pkCount">' + pc + '/' + track.pack.length + '</span></h3>'
+        + '<div class="pkg' + (allPack ? " done" : "") + '" id="pkBox"><ul class="tasks">'
+        + track.pack.map(function(item, i){
+          var k = "p" + (i+1);
+          var on = st.done.indexOf(k) >= 0;
+          return '<li><button class="task' + (on ? " checked" : "") + '" data-k="' + k + '" aria-pressed="' + (on ? "true" : "false") + '">'
+            + '<span class="box">✓</span><span class="tx">' + esc(packItemLabel(item, goal)) + '</span></button></li>';
+        }).join("")
+        + '</ul></div>'
+        + '<div class="finish' + (s.done === s.total ? "" : " off") + '" id="finishBox">'
+        + (s.done === s.total ? "🎉 목표 달성 · " : "🏁 최종 산출물 · ") + esc(deliverableText(track, st))
+        + '</div></div>';
+    }
+
+    document.getElementById("shBody").innerHTML =
+      tabs + goalUi
+      + '<div class="sh-sec"><h3>' + esc(track.label) + '</h3>'
+      + '<div class="pp-topic">' + esc(track.topic) + '</div>'
+      + '<div class="pp-meta"><span id="wfCur">현재 ' + s.stage + '단계 · ' + esc(track.stages[s.stage-1].name) + '</span><span id="wfCount">' + s.done + '/' + s.total + '</span></div>'
+      + '<div class="prog"><i id="wfBar" style="width:' + s.pct + '%"></i></div></div>'
+      + '<div class="stages" id="stageList">' + stages + '</div>'
+      + packHtml
+      + '<div class="sh-sec"><h3>작업 메모</h3>'
+      + '<textarea id="wfMemo" rows="3" placeholder="이 책상에서 떠오른 아이디어·다음 할 일">' + esc(st.memo) + '</textarea>'
+      + '<div style="display:flex;justify-content:flex-end;margin-top:8px">'
+      + '<button class="btn" id="wfMemoSave" type="button">메모 저장</button></div></div>'
+      + '<div class="sh-sec"><h3>안내</h3><div class="sh-note">단계를 누르면 체크리스트가 열립니다. 체크·메모는 이 브라우저(localStorage)에 저장되고, 진행률은 작업실·비서현황에도 함께 반영됩니다.</div></div>';
+
+    bindWorkflow(deskId, track.id);
+  }
+
+  function refreshWorkflow(deskId, trackId){
+    var state = wfAll();
+    var track = findTrack(deskId, trackId);
+    var st = state[deskId][track.id];
+    var s = wfStats(track, st);
+    var goal = st.goal || "";
+
+    var cur = document.getElementById("wfCur");
+    if(cur) cur.textContent = "현재 " + s.stage + "단계 · " + track.stages[s.stage-1].name;
+    var cnt = document.getElementById("wfCount");
+    if(cnt) cnt.textContent = s.done + "/" + s.total;
+    var bar = document.getElementById("wfBar");
+    if(bar) bar.style.width = s.pct + "%";
+
+    Array.prototype.forEach.call(document.querySelectorAll("#shBody .stage"), function(el){
+      var n = Number(el.getAttribute("data-stage"));
+      var ss = stageState(track, n, st);
+      var c = stageDoneCount(track, n, st.done);
+      el.classList.remove("done", "now", "todo");
+      el.classList.add(ss);
+      var lab = el.querySelector(".st-state");
+      if(lab) lab.textContent = ss === "done" ? "완료" : (ss === "now" ? c + "/" + track.stages[n-1].tasks.length : "예정");
+    });
+
+    var pk = document.getElementById("pkCount");
+    if(pk && track.pack){
+      var pc = packDoneCount(track, st);
+      pk.textContent = pc + "/" + track.pack.length;
+      var box = document.getElementById("pkBox");
+      if(box) box.classList.toggle("done", pc === track.pack.length);
+    }
+    var fin = document.getElementById("finishBox");
+    if(fin){
+      fin.classList.toggle("off", s.done !== s.total);
+      fin.textContent = (s.done === s.total ? "🎉 목표 달성 · " : "🏁 최종 산출물 · ") + deliverableText(track, st);
+    }
+    Array.prototype.forEach.call(document.querySelectorAll("#shBody .track"), function(b){
+      var id = b.getAttribute("data-wtrack");
+      var q = wfStats(findTrack(deskId, id), state[deskId][id]);
+      var sp = b.querySelector("span");
+      if(sp) sp.textContent = (state[deskId][id].goal ? state[deskId][id].goal + " · " : "") + q.stage + "단계 · " + q.pct + "%";
+    });
+
+    buildWorkroomHub();
+    buildStatus();
+  }
+
+  function bindWorkflow(deskId, trackId){
+    var body = document.getElementById("shBody");
+
+    Array.prototype.forEach.call(body.querySelectorAll("[data-wtrack]"), function(b){
+      b.addEventListener("click", function(){
+        var memoEl = document.getElementById("wfMemo");
+        if(memoEl){
+          var st0 = wfAll();
+          st0[deskId][trackId].memo = memoEl.value;
+          wfSave(st0);
+        }
+        renderWorkflow(deskId, b.getAttribute("data-wtrack"));
+      });
+    });
+
+    Array.prototype.forEach.call(body.querySelectorAll("[data-goal]"), function(b){
+      b.addEventListener("click", function(){
+        var state = wfAll();
+        var memoEl = document.getElementById("wfMemo");
+        if(memoEl) state[deskId][trackId].memo = memoEl.value;
+        state[deskId][trackId].goal = b.getAttribute("data-goal");
+        wfSave(state);
+        renderWorkflow(deskId, trackId);
+      });
+    });
+
+    Array.prototype.forEach.call(body.querySelectorAll(".st-head"), function(h){
+      h.addEventListener("click", function(){
+        var stageEl = h.parentNode;
+        var open = stageEl.classList.toggle("open");
+        h.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    });
+
+    Array.prototype.forEach.call(body.querySelectorAll(".task"), function(t){
+      t.addEventListener("click", function(){
+        var k = t.getAttribute("data-k");
+        var state = wfAll();
+        var arr = state[deskId][trackId].done;
+        var i = arr.indexOf(k);
+        if(i >= 0){ arr.splice(i, 1); } else { arr.push(k); }
+        wfSave(state);
+        var on = i < 0;
+        t.classList.toggle("checked", on);
+        t.setAttribute("aria-pressed", on ? "true" : "false");
+        refreshWorkflow(deskId, trackId);
+      });
+    });
+
+    var saveBtn = document.getElementById("wfMemoSave");
+    if(saveBtn){
+      saveBtn.addEventListener("click", function(){
+        var state = wfAll();
+        state[deskId][trackId].memo = document.getElementById("wfMemo").value;
+        wfSave(state);
+        toast("메모를 저장했습니다");
+      });
+    }
+  }
+
+  function openWorkflow(deskId, trackId){
+    var d = null;
+    DESKS.forEach(function(x){ if(x.id === deskId) d = x; });
+    var desk = WORKFLOWS[deskId];
+    document.getElementById("shTitle").textContent = d ? d.name : deskId;
+    document.getElementById("shSub").textContent = (desk.sub || (d ? d.org : "")) + " · " + (desk.tracks.length > 1 ? desk.tracks.length + "개 트랙" : "워크플로");
+    renderWorkflow(deskId, trackId || desk.tracks[0].id);
+    openSheet();
+  }
+
+  function deskAvgPct(deskId, state){
+    var desk = WORKFLOWS[deskId];
+    var sum = 0;
+    desk.tracks.forEach(function(t){ sum += wfStats(t, state[deskId][t.id]).pct; });
+    return Math.round(sum / desk.tracks.length);
+  }
+
+  function buildWorkroomHub(){
+    var hub = document.getElementById("paperHub");
+    if(!hub) return;
+    var state = wfAll();
+    var desk = WORKFLOWS.irb;
+    var html = desk.tracks.map(function(t){
+      var st = state.irb[t.id];
+      var s = wfStats(t, st);
+      var segs = t.stages.map(function(sg, idx){
+        var c = stageDoneCount(t, idx+1, st.done);
+        return '<i><b style="width:' + Math.round(c / sg.tasks.length * 100) + '%"></b></i>';
+      }).join("");
+      var packPct = t.pack ? Math.round(packDoneCount(t, st) / t.pack.length * 100) : 0;
+      segs += '<i><b style="width:' + packPct + '%"></b></i>';
+      return '<button class="paper-card" data-ptrack="' + t.id + '">'
+        + '<span class="pc-top"><span class="pc-name">' + esc(t.label) + '</span>'
+        + '<span class="pc-stage">' + esc(st.goal) + ' · ' + s.stage + '단계</span></span>'
+        + '<span class="pc-topic">' + esc(t.topic) + '</span>'
+        + '<span class="segs">' + segs + '</span>'
+        + '<span class="pc-foot"><span>' + s.done + '/' + s.total + ' 체크</span><span>' + s.pct + '%</span></span>'
+        + '</button>';
+    }).join("");
+    hub.innerHTML = html;
+
+    var gc = document.getElementById("goalCard");
+    if(gc){
+      var a = wfStats(desk.tracks[0], state.irb.A);
+      var bk = wfStats(desk.tracks[1], state.irb.B);
+      var best = Math.max(a.done / a.total, bk.done / bk.total);
+      gc.innerHTML = '<div class="g-k">이번 사이클 목표</div>'
+        + '<div class="g-v">SSCI / KCI 저널 투고 완료 원고 1편</div>'
+        + '<div class="g-sub">트랙 A ' + esc(state.irb.A.goal) + ' · ' + a.stage + '단계(' + a.pct + '%) &nbsp;|&nbsp; 트랙 B ' + esc(state.irb.B.goal) + ' · ' + bk.stage + '단계(' + bk.pct + '%)'
+        + '<br>가장 앞선 트랙 기준 ' + Math.round(best * 100) + '% · 5단계 + 투고 패키지 6종</div>';
+    }
+  }
+
   /* ───────── 저장소 ───────── */
   var LS = {
     get:function(k, d){
@@ -1091,13 +1717,30 @@
       if(order[a.st] !== order[b.st]) return order[a.st]-order[b.st];
       return (a.row*10+a.col) - (b.row*10+b.col);
     });
+    var wst = wfAll();
+    var sumPct = 0;
     var el = document.getElementById("statusList");
     el.innerHTML = sorted.map(function(d){
+      var wf = WORKFLOWS[d.id];
+      var pct = wf ? deskAvgPct(d.id, wst) : 0;
+      sumPct += pct;
+      var sub = "";
+      if(wf){
+        var first = wf.tracks[0];
+        var fs = wfStats(first, wst[d.id][first.id]);
+        sub = '<small class="nm-sub">' + (wf.tracks.length > 1 ? wf.tracks.length + "트랙 · " : "") + "현재 " + fs.stage + "단계 · " + fs.done + "/" + fs.total + '</small>';
+      }
       return '<button class="desk-line" data-id="'+d.id+'">'
         + '<span class="mini"><img src="./avatar.png" alt=""></span>'
-        + '<span class="nm">'+esc(d.name)+'</span>'
+        + '<span class="nm">'+esc(d.name)+sub+'</span>'
+        + '<span class="pcnt">'+pct+'%</span>'
         + '<span class="st '+d.st+'">'+STATUS_TEXT[d.st]+'</span></button>';
     }).join("");
+    var allPct = Math.round(sumPct / DESKS.length);
+    var ap = document.getElementById("wfAllPct");
+    var ab = document.getElementById("wfAllBar");
+    if(ap) ap.textContent = allPct + "%";
+    if(ab) ab.style.width = allPct + "%";
     el.addEventListener("click", function(e){
       var b = e.target.closest(".desk-line");
       if(b){ openDesk(b.getAttribute("data-id")); }
@@ -1208,6 +1851,7 @@
   }
 
   function openDesk(id){
+    if(WORKFLOWS[id]){ openWorkflow(id); return; }
     var d = null;
     DESKS.forEach(function(x){ if(x.id === id) d = x; });
     if(!d) return;
@@ -1320,9 +1964,21 @@
   buildWorks();
   buildRoutines();
   buildStatus();
+  buildWorkroomHub();
+  document.getElementById("paperHub").addEventListener("click", function(e){
+    var b = e.target.closest("[data-ptrack]");
+    if(b){ openWorkflow("irb", b.getAttribute("data-ptrack")); }
+  });
   document.getElementById("exDate").value = todayStr();
   renderLedger();
   renderMemos();
+
+  /* PWA: 홈 화면 설치 + 오프라인 */
+  if("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")){
+    window.addEventListener("load", function(){
+      navigator.serviceWorker.register("./sw.js").catch(function(){});
+    });
+  }
 })();
 </script>
 </body>
