@@ -1,11 +1,12 @@
 /* 김동욱 비서실 — 오프라인 캐시 서비스 워커 */
-const CACHE = "kdu-office-v3";
+const CACHE = "kdu-office-v4";
 const ASSETS = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./office-map.png",
   "./avatar.png",
+  "./avatar.png?v=2",
   "./icon-192.png",
   "./icon-512.png"
 ];

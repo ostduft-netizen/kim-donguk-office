@@ -591,7 +591,7 @@
 <div class="app">
   <header class="hdr">
     <div class="brand">
-      <div class="ava"><img src="./avatar.png" alt="김동욱 님 프로필 캐릭터"></div>
+      <div class="ava"><img src="./avatar.png?v=2" alt="김동욱 님 프로필 캐릭터"></div>
       <div class="who">
         <h1>김동욱 비서실</h1>
         <p><span class="dot"></span>동욱님 전용 · GEIST · YUNUS · PNU</p>
@@ -1981,7 +1981,7 @@
       html += '<button class="desk'+(d.busy?" busy":"")+'" data-st="'+d.st+'" data-id="'+d.id+'"'
         + ' style="left:'+COLX[d.col-1]+'%;top:'+ROWY[d.row-1]+'%"'
         + ' aria-label="'+esc(d.name+" · "+STATUS_TEXT[d.st])+'" title="'+esc(d.name)+'">'
-        + '<span class="ring" data-ring="'+d.id+'"><span class="face"><img src="./avatar.png" alt=""></span></span>'
+        + '<span class="ring" data-ring="'+d.id+'"><span class="face"><img src="./avatar.png?v=2" alt=""></span></span>'
         + '<span class="badge">'+badge+'</span>'
         + '</button>';
     });
@@ -2134,7 +2134,7 @@
         }
       }
       return '<button class="desk-line" data-id="'+d.id+'">'
-        + '<span class="mini"><img src="./avatar.png" alt=""></span>'
+        + '<span class="mini"><img src="./avatar.png?v=2" alt=""></span>'
         + '<span class="nm">'+esc(d.name)+sub+'</span>'
         + '<span class="pcnt">'+pct+'%</span>'
         + '<span class="st '+d.st+'">'+STATUS_TEXT[d.st]+'</span></button>';
