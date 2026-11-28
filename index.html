@@ -350,14 +350,14 @@
   .jp-meta b{color:#3B2A1E;font-weight:800}
   .jp-btn{margin-top:11px;width:100%;border:0;border-radius:11px;padding:9px;cursor:pointer;font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:-.02em;color:#FFF7E9;background:linear-gradient(180deg,#75513A,#4A3527);box-shadow:0 4px 10px rgba(74,53,39,.2)}
   /* ── 논문 파이프라인 ────────────────── */
-  .track-tabs{display:flex;gap:6px;margin:10px 0 12px}
+  .track-tabs{display:flex;gap:6px;margin:10px 0 12px;overflow-x:auto;padding-bottom:2px}
   .track{
-    flex:1;text-align:left;padding:8px 10px;border-radius:12px;cursor:pointer;
+    flex:1 0 auto;min-width:96px;text-align:left;padding:8px 10px;border-radius:12px;cursor:pointer;
     border:1px solid var(--line-2);background:linear-gradient(180deg,#FFFDF7,#F8F0DF);
     font-family:var(--sans);color:#5B4635;display:flex;flex-direction:column;gap:2px;
   }
-  .track b{font-size:11px;font-weight:800;letter-spacing:-.03em}
-  .track span{font-size:9px;font-weight:700;color:var(--muted)}
+  .track b{font-size:11px;font-weight:800;letter-spacing:-.03em;white-space:nowrap}
+  .track span{font-size:9px;font-weight:700;color:var(--muted);white-space:nowrap}
   .track.active{background:linear-gradient(180deg,#75513A,#4A3527);border-color:#3A2A1E;color:#FFF7E9;box-shadow:0 5px 12px rgba(74,53,39,.24)}
   .track.active span{color:#E3C48D}
   .pp-topic{font-family:var(--serif);font-size:14px;font-weight:700;color:#3B2A1E;letter-spacing:-.02em;line-height:1.35;word-break:keep-all}
