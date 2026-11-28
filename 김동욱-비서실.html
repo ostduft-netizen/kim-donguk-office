@@ -326,6 +326,29 @@
   .rt h3{margin:0;font-size:12px;font-weight:800;letter-spacing:-.03em;color:#3B2A1E}
   .rt p{margin:3px 0 0;font-size:10.5px;line-height:1.55;color:#6E5A47;letter-spacing:-.02em}
   .pause{font-size:9px;font-weight:800;color:#9C4426;background:rgba(176,84,52,.12);border:1px solid rgba(176,84,52,.28);border-radius:6px;padding:2px 6px}
+  /* ── JJPS 메인 과제 ─────────────────── */
+  .jp-card{
+    position:relative;overflow:hidden;margin-top:9px;border-radius:16px;padding:13px 14px;
+    border:1px solid rgba(46,74,56,.26);
+    background:linear-gradient(160deg,#FFFCF5,#F6EDDB 62%,#F0E3C9);
+    box-shadow:0 5px 16px rgba(74,53,39,.09);
+  }
+  .jp-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#2E4A38,#C4883C 65%,#D8A657)}
+  .jp-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .jp-badge{font-size:8.5px;font-weight:900;letter-spacing:.06em;color:#F6E9D4;background:linear-gradient(180deg,#3F6B50,#2E4A38);border-radius:6px;padding:3px 7px;white-space:nowrap}
+  .jp-status{font-size:8.5px;font-weight:800;color:#8A5A1E;background:rgba(216,166,87,.18);border:1px solid rgba(154,106,32,.32);border-radius:999px;padding:2px 8px;white-space:nowrap}
+  .jp-title{margin:7px 0 0;font-family:var(--serif);font-size:14px;font-weight:700;line-height:1.4;color:#3B2A1E;letter-spacing:-.02em;word-break:keep-all}
+  .jp-sub{margin:3px 0 0;font-size:10px;font-weight:700;color:#7A5318;letter-spacing:-.02em;line-height:1.5;word-break:keep-all}
+  .jp-block{margin-top:10px;padding-top:9px;border-top:1px dashed rgba(107,74,51,.22)}
+  .jp-h{display:block;font-size:8.5px;font-weight:900;letter-spacing:.04em;color:#8A6A46;margin-bottom:5px}
+  .jp-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px}
+  .jp-list li{font-size:10px;line-height:1.5;color:#5B4635;letter-spacing:-.02em;word-break:keep-all}
+  .jp-list b{color:#3B2A1E;font-weight:800}
+  .jp-chips{display:flex;flex-wrap:wrap;gap:4px}
+  .jp-chip{font-size:9px;font-weight:800;color:#6B4A33;background:rgba(107,74,51,.06);border:1px solid var(--line);border-radius:999px;padding:2px 7px;letter-spacing:-.02em}
+  .jp-meta{font-size:9.5px;font-weight:700;color:#6E5A47;line-height:1.6;letter-spacing:-.02em;word-break:keep-all}
+  .jp-meta b{color:#3B2A1E;font-weight:800}
+  .jp-btn{margin-top:11px;width:100%;border:0;border-radius:11px;padding:9px;cursor:pointer;font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:-.02em;color:#FFF7E9;background:linear-gradient(180deg,#75513A,#4A3527);box-shadow:0 4px 10px rgba(74,53,39,.2)}
   /* ── 논문 파이프라인 ────────────────── */
   .track-tabs{display:flex;gap:6px;margin:10px 0 12px}
   .track{
@@ -643,6 +666,7 @@
           <div class="hq-date">2026.11.27 금</div>
         </div>
         <div class="hq-body">
+          <div class="hq-item"><span class="hq-ic">📝</span><div class="hq-tx"><b>JJPS(SSCI) 메인 과제 등록</b> — 공공행사 외주·비난 회피 연구노트를 논문·IRB 책상에 올림<span class="sub">가설 3개 · 경쟁 설명 2개 · 실험 1·2 설계 반영</span></div></div>
           <div class="hq-item"><span class="hq-ic">🏢</span><div class="hq-tx"><b>산학협력 참여기업 현장점검</b> — 이번 주 중, 담당자 일정 회신 대기<span class="sub">납품 서류 준비와 함께 대기 중</span></div></div>
           <div class="hq-item"><span class="hq-ic">⏳</span><div class="hq-tx"><b>마감 임박 2건</b> — 11/30 18:00 임팩트 투자 지원사업(D-3), 12/2 15:00 팝업빌리지(D-5)<span class="sub">신청 여부 결정만 남았습니다</span></div></div>
           <div class="hq-item"><span class="hq-ic">✅</span><div class="hq-tx"><b>10:30 브리핑 완료</b> — 일정 4건 · 마감 3건 · 메일 2건 점검<span class="sub">다음 브리핑은 내일 06:04</span></div></div>
@@ -687,12 +711,53 @@
 
     <!-- ── 5. 작업실 ────────────────────── -->
     <section class="panel" id="panel-work" role="tabpanel" hidden>
-      <div class="sec"><h2>논문 파이프라인</h2><span class="cnt">2트랙 · SSCI/KCI</span></div>
-      <div class="goal-card" id="goalCard"></div>
+      <div class="sec"><h2>논문 파이프라인</h2><span class="cnt">3트랙 · SSCI/KCI</span></div>
+      <div class="jp-card" id="jjpsCard">
+        <div class="jp-top"><span class="jp-badge">JJPS · SSCI</span><span class="jp-status">사전승인 트랙 · 설계</span></div>
+        <div class="jp-title">공공행사 외주와 비난 회피 — 내부 감사관·시민 청중 비대칭 및 AI 책임 대체</div>
+        <div class="jp-sub">결과 비공개 심사(Pre-results review) 연구노트 → 사전승인 후 3개월 내 데이터 수집·완성 원고 제출</div>
+
+        <div class="jp-block"><span class="jp-h">핵심 3대 가설</span>
+          <ul class="jp-list">
+            <li><b>① 내부 방패</b> — 외주는 감사관의 눈에서 담당자를 보호한다. 적법한 입찰과 계약서가 "절차대로 했다"는 근거가 된다.</li>
+            <li><b>② 청중 비대칭</b> — 보호 효과는 주민 관점보다 감사관 관점에서 더 크다. 동아시아에서 효과가 약했던 것은 측정 대상이 시민이었기 때문일 수 있다.</li>
+            <li><b>③ AI 책임 대체 한계</b> — 외부 업체의 AI 서비스는 사람 계약업체만큼 보호하지 못한다. 사고가 나면 비난은 AI를 쓴 담당자에게 쏠린다.</li>
+          </ul>
+        </div>
+
+        <div class="jp-block"><span class="jp-h">경쟁 설명 (함께 검증)</span>
+          <ul class="jp-list">
+            <li><b>전환 가설</b> — 문책을 줄이는 게 아니라 잘못의 이름만 '안전관리 소홀' → '계약 관리 소홀'로 바꿀 수 있다. 처분 수준과 잘못의 유형을 분리 측정.</li>
+            <li><b>역량·거래비용</b> — 맞다면 외주 선호가 업무 부담·비용에 따라 움직인다. 비난 회피 설명은 <b>감사 예정 여부</b>에 따라 움직인다고 예측한다.</li>
+          </ul>
+        </div>
+
+        <div class="jp-block"><span class="jp-h">연구 설계</span>
+          <div class="jp-chips" style="margin-bottom:5px"><span class="jp-chip">실험 1 · 비네트</span><span class="jp-chip">공무원 2,000명</span><span class="jp-chip">시민 1,200명</span></div>
+          <div class="jp-meta">구청 축제 안전사고 기사에 운영 방식(직접 총괄 / 일괄 외주 / AI 활용 직접 총괄) × 평가 관점(감사관 / 주민)을 무작위 배정 → 비난·처분 수준 비교</div>
+          <div class="jp-chips" style="margin:9px 0 5px"><span class="jp-chip">실험 2 · 컨조인트</span><span class="jp-chip">8회 선택 과제</span><span class="jp-chip">책임 프리미엄</span><span class="jp-chip">감사 예정 여부</span></div>
+          <div class="jp-meta">운영안 두 개 중 하나를 8회 고르게 해 외주에 더 내는 비용(<b>책임 프리미엄</b>)과, 감사가 예정됐을 때 그 프리미엄이 커지는지 추정</div>
+        </div>
+
+        <div class="jp-block"><span class="jp-h">기여</span>
+          <ul class="jp-list">
+            <li>비난 회피 실험의 대상을 시민에서 <b>관료제 내부 평가자</b>로 이동</li>
+            <li><b>책임 프리미엄</b>을 처음으로 금액처럼 계량</li>
+            <li>사람 계약업체와 AI의 <b>비난 인수 대체 가능성</b> 첫 검증</li>
+          </ul>
+        </div>
+
+        <div class="jp-block"><span class="jp-h">한 문장 결론 (가설이 맞을 경우)</span>
+          <div class="jp-meta">기술적으로는 가장 먼저 자동화될 총괄 업무가, 제도적으로는 가장 늦게 사라질 수 있다 — 공공행사 대행업이 서비스업에서 <b>'책임 인수업'</b>으로 바뀌어 간다.</div>
+        </div>
+
+        <button class="jp-btn" type="button" data-jjps-open="C">JJPS 연구노트 워크플로 열기 →</button>
+      </div>
+      <div class="goal-card" id="goalCard" style="margin-top:9px"></div>
       <div class="stack" id="paperHub" style="margin-top:9px"></div>
       <div class="sec"><h2>지원사업 비서</h2><span class="cnt">3트랙 매칭</span></div>
       <div id="grantHub"></div>
-      <div class="sec"><h2>작업실 — 진행 중</h2><span class="cnt">4개 작업</span></div>
+      <div class="sec"><h2>작업실 — 진행 중</h2><span class="cnt">5개 작업</span></div>
       <div class="stack" id="workList"></div>
     </section>
 
@@ -895,13 +960,13 @@
      ],
      next:"납품일 확정되면 세금계산서 즉시 발행"},
     {id:"irb", name:"논문·IRB", row:2, col:2, st:"alert", org:"부산대 · 연구",
-     sum:"e-IRB 재제출 12/22 · 논문 2편 심사 대기",
+     sum:"JJPS(SSCI) 신규 과제 설계 · e-IRB 재제출 12/22",
      items:[
+       "<b>JJPS(SSCI)</b> 결과 비공개 심사 — 공공행사 외주·비난 회피 연구노트",
        "<b>e-IRB 신규과제</b> 9월 수정요청 → 재제출 기한 <b>12/22</b>",
-       "국제학술지 A — 교정본 제출 후 proof 대기",
-       "국제학술지 B — 재투고 후 심사 대기"
+       "국제학술지 A proof 대기 · B 재투고 심사 대기"
      ],
-     next:"e-IRB 답변서 초안 12월 첫 주까지"},
+     next:"JJPS 연구노트 목차·가설표 → e-IRB 답변서 12월 첫 주"},
     {id:"pr", name:"홍보·링크드인", row:2, col:3, st:"on", org:"개인 브랜딩",
      sum:"프로필 정비 완료 · 네이버 심사 중",
      items:[
@@ -1002,6 +1067,7 @@
      items:[
        "2026-2학기 NGOs and Global Civil Society 강의",
        "기말 페이퍼 마감 2026-12-21 23:59",
+       "JJPS(SSCI) 사전승인 트랙 — 연구노트 작성 착수",
        "e-IRB 신규과제 재제출 기한 12/22",
        "논문 2편 심사·교정 대기 (국제학술지)"
      ],
@@ -1045,12 +1111,15 @@
   var MEETINGS = [
     {emoji:"🏛️", name:"가이스트 회의실", role:"대표 · 산학협력/납품", items:["참여기업 현장점검 일정 회신 대기","시제품 2건 납품 서류 6종 준비","견적서 금액·연도 검산 절차 정리"], memo:"납품 서류는 세금계산서 2부 분리 발행이 핵심입니다."},
     {emoji:"🌍", name:"유누스코리아 회의실", role:"이사장 · 캠프/SDGs", items:["2027-01-15 지역자원 교육캠프","2027-01-21~22 그린바이오 아카데미","강의안 제작 후 평창군·연구팀과 공유"], memo:"12월에 일정 변동 여부를 다시 확인하기로 했습니다."},
-    {emoji:"🎓", name:"부산대 연구실", role:"겸임교수 · 강의/연구", items:["기말 페이퍼 12/21 23:59","수강생 NGO 발표자료 7~8건 수합","e-IRB 재제출 12/22 · 논문 2편 심사 대기"], memo:"발표자료 수합 방식을 정해 수강생에게 공지해야 합니다."},
+    {emoji:"🎓", name:"부산대 연구실", role:"겸임교수 · 강의/연구", items:["기말 페이퍼 12/21 23:59","수강생 NGO 발표자료 7~8건 수합","JJPS 연구노트 초안 작성","e-IRB 재제출 12/22 · 논문 2편 심사 대기"], memo:"발표자료 수합 방식을 정해 수강생에게 공지해야 합니다."},
     {emoji:"🏢", name:"린스크 회의실", role:"법인 · 출판/협업", items:["린스크북스 출판·유통 진행","전자계약·마감 임박 메일 확인","법인 등록·사명 관련 안내 확인"], memo:"대표·역할 관계는 확인 전까지 단정하지 않습니다."},
     {emoji:"✍️", name:"미디어 스튜디오", role:"브런치·링크드인", items:["브런치 글감 보관함 정리","링크드인 주간 브리핑 (월 09:00)","네이버 인물정보 심사 결과 대기"], memo:"글 1편 → 링크드인 요약 → 인물정보 링크 순서로 연결."}
   ];
 
   var WORKS = [
+    {emoji:"📝", name:"JJPS 연구노트 (SSCI)", pct:8, tone:"amber",
+     lines:["주제: 공공행사 외주와 비난 회피 — 내부 감사관·시민 청중 비대칭","가설 3개·경쟁 설명 2개·실험 1·2 설계 정리 완료","다음: 선행연구 매트릭스 → 사전승인 신청"],
+     tags:["신규","SSCI"]},
     {emoji:"🗑️", name:"구글 포토 정리", pct:99, tone:"green",
      lines:["누적 <b>4만 3천여 장</b> 영구 삭제 (20차 완료)","Google 포토 <b>약 150GB</b> 회수","다음 21차는 03:15 자동 실행"],
      tags:["자동","매일 03:15"]},
@@ -1157,6 +1226,17 @@
     }]},
 
     irb: {sub:"부산대 · 연구", goalable:true, tracks:[
+      {id:"C", label:"JJPS · 연구노트", topic:"공공행사 외주와 비난 회피 — 내부 감사관 vs 시민 청중 비대칭 & AI 책임 대체", goal:"SSCI",
+       deliverableTpl:"JJPS(SSCI) 사전승인 후 완성 원고 제출",
+       stages:[
+         {icon:"🔍", name:"연구노트 설계 · RQ 정교화", tasks:["핵심 주장 3개 문장화(내부 방패·청중 비대칭·AI 책임 대체)","경쟁 설명 2개(전환 가설·역량/거래비용) 식별 전략","비난 회피·대리인 이론 프레임 확정"], out:"RQ·가설·경쟁 설명표"},
+         {icon:"📚", name:"선행연구 · 측정 설계", tasks:["동아시아 외주 효과 선행연구 재검토","처분 수준·잘못 유형 분리 측정문항","책임 프리미엄(지불의향) 지표 설계"], out:"선행연구 매트릭스 + 설문지 초안"},
+         {icon:"🧪", name:"Pre-results 심사 제출", tasks:["JJPS 트랙 요건·분량·연구윤리 확인","연구노트(가설·설계·분석계획) 작성","사전승인 신청"], out:"연구노트 제출본"},
+         {icon:"📊", name:"데이터 수집 — 승인 후 3개월", tasks:["실험 1 비네트: 공무원 2,000명 + 시민 1,200명","실험 2 컨조인트: 8회 선택 과제","품질점검·표본 가중·사전분석"], out:"실험 1·2 데이터셋"},
+         {icon:"✍️", name:"완성 원고 · 투고", tasks:["분석계획대로 추정·강건성 검증","결과·논의('책임 인수업') 집필","영문 교정·레퍼런스·표 정리"], out:"완성 원고 제출본"}
+       ],
+       pack:["사전승인(Pre-results) 통지","데이터 수집 완료·코드북","실험 1 분석표","실험 2 책임 프리미엄 추정","완성 원고 제출본","JJPS 응답 매트릭스"],
+       done:[]},
       {id:"A", label:"연구 트랙 A", topic:"사회적기업 창업가의 정당성 내러티브", goal:"SSCI",
        deliverableTpl:"{goal} 저널 투고 완료 원고 1편",
        stages:[
@@ -1610,13 +1690,16 @@
 
     var gc = document.getElementById("goalCard");
     if(gc){
-      var a = wfStats(desk.tracks[0], state.irb.A);
-      var bk = wfStats(desk.tracks[1], state.irb.B);
-      var best = Math.max(a.done / a.total, bk.done / bk.total);
-      gc.innerHTML = '<div class="g-k">이번 사이클 목표</div>'
-        + '<div class="g-v">SSCI / KCI 저널 투고 완료 원고 1편</div>'
-        + '<div class="g-sub">트랙 A ' + esc(state.irb.A.goal) + ' · ' + a.stage + '단계(' + a.pct + '%) &nbsp;|&nbsp; 트랙 B ' + esc(state.irb.B.goal) + ' · ' + bk.stage + '단계(' + bk.pct + '%)'
-        + '<br>가장 앞선 트랙 기준 ' + Math.round(best * 100) + '% · 5단계 + 투고 패키지 6종</div>';
+      var tC = findTrack("irb", "C");
+      var c = wfStats(tC, state.irb[tC.id]);
+      var line = desk.tracks.map(function(t){
+        var q = wfStats(t, state.irb[t.id]);
+        return esc(t.label) + ' ' + esc(state.irb[t.id].goal) + ' · ' + q.stage + '단계(' + q.pct + '%)';
+      }).join(' &nbsp;|&nbsp; ');
+      gc.innerHTML = '<div class="g-k">이번 사이클 메인 과제 · JJPS (SSCI)</div>'
+        + '<div class="g-v">공공행사 외주와 비난 회피 — 사전승인 후 3개월 내 완성 원고</div>'
+        + '<div class="g-sub">' + line
+        + '<br>JJPS 연구노트 ' + c.stage + '단계 · ' + c.pct + '% — 5단계와 투고 패키지 ' + tC.pack.length + '종을 마치면 제출본이 됩니다.</div>';
     }
   }
 
@@ -2418,6 +2501,10 @@
     var b = e.target.closest("[data-ptrack]");
     if(b){ openWorkflow("irb", b.getAttribute("data-ptrack")); }
   });
+  var jjpsBtn = document.querySelector("[data-jjps-open]");
+  if(jjpsBtn){
+    jjpsBtn.addEventListener("click", function(){ openWorkflow("irb", "C"); });
+  }
   document.getElementById("grantHub").addEventListener("click", function(e){
     var b = e.target.closest("[data-gopen]");
     if(!b) return;

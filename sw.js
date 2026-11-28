@@ -1,5 +1,5 @@
 /* 김동욱 비서실 — 오프라인 캐시 서비스 워커 */
-const CACHE = "kdu-office-v4";
+const CACHE = "kdu-office-v5";
 const ASSETS = [
   "./",
   "./index.html",
